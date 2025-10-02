@@ -1,12 +1,18 @@
 import { Routes } from '@angular/router';
 import NotFoundPage from './pages/not-found/not-found-page';
-import OrdersPage from '../orders/pages/orders/orders-page';
-import PatientsPage from '../patients/pages/patients/patients-page';
-import DoctorsPage from '../doctors/pages/doctors/doctors-page';
+import OrdersPage from '../orders/pages/orders-list/orders-page';
+import PatientsPage from '../patients/pages/patients-list/patients-page';
+import DoctorsPage from '../doctors/pages/doctors-list/doctors-page';
 import { NAVIGATION_PATHS } from './constants/navigation-path';
 import PatientsLayout from '../patients/layouts/patients-layout';
 import DoctorsLayout from '../doctors/layouts/doctors-layout';
 import OrdersLayout from '../orders/layouts/orders-layout';
+import { CreateOrder } from '../orders/pages/order-create/order-create';
+import { UpdateOrder } from '../orders/pages/order-update/order-update';
+import { CreateDoctor } from '../doctors/pages/doctor-create/doctor-create';
+import { UpdateDoctor } from '../doctors/pages/doctor-update/doctor-update';
+import { CreatePatient } from '../patients/pages/patient-create/patient-create';
+import { UpdatePatient } from '../patients/pages/patient-update/patient-update';
 
 export const frontRoutes: Routes = [
   {
@@ -21,6 +27,16 @@ export const frontRoutes: Routes = [
       {
         path: NAVIGATION_PATHS.ORDERS,
         component: OrdersPage,
+        children: [
+          {
+            path: NAVIGATION_PATHS.ORDERS_CREATE,
+            component: CreateOrder,
+          },
+          {
+            path: NAVIGATION_PATHS.ORDERS_UPDATE,
+            component: UpdateOrder,
+          },
+        ],
       },
     ],
   },
@@ -31,6 +47,16 @@ export const frontRoutes: Routes = [
       {
         path: '',
         component: PatientsPage,
+        children: [
+          {
+            path: NAVIGATION_PATHS.PATIENTS_CREATE,
+            component: CreatePatient,
+          },
+          {
+            path: NAVIGATION_PATHS.PATIENTS_UPDATE,
+            component: UpdatePatient,
+          },
+        ],
       },
     ],
   },
@@ -41,6 +67,16 @@ export const frontRoutes: Routes = [
       {
         path: '',
         component: DoctorsPage,
+        children: [
+          {
+            path: NAVIGATION_PATHS.DOCTORS_CREATE,
+            component: CreateDoctor,
+          },
+          {
+            path: NAVIGATION_PATHS.DOCTORS_UPDATE,
+            component: UpdateDoctor,
+          },
+        ],
       },
     ],
   },

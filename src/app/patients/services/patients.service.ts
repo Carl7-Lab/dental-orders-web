@@ -1,15 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { FULL_NAVIGATION_PATHS } from '../../../shared/constants/navigation-path';
-import { RouterLink } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Patient } from '../interfaces/patient.interface';
 
-@Component({
-  selector: 'patients-page',
-  imports: [RouterLink],
-  templateUrl: './patients-page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Injectable({
+  providedIn: 'root',
 })
-export default class PatientsPage {
-  patients = signal<any[]>([
+export class PatientService {
+  patients: Patient[] = [
     {
       id: 1,
       name: 'María González',
@@ -42,9 +38,13 @@ export default class PatientsPage {
       address: 'Calle 456, Ciudad, País',
       notes: 'Alérgico a la penicilina',
     },
-  ]);
-
-  tableHeads = signal<string[]>(['No.', 'Nombre', 'Email', 'Teléfono', 'Dirección', 'Notas']);
-
-  patientUpdatePath = FULL_NAVIGATION_PATHS.PATIENTS_UPDATE;
+  ];
+  patient: Patient | null = {
+    id: 1,
+    name: 'María González',
+    email: 'maria.gonzalez@example.com',
+    phone: '0991234567',
+    address: 'Calle 456, Ciudad, País',
+    notes: 'Alérgico a la penicilina',
+  };
 }

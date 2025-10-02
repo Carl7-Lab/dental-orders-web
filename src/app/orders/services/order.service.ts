@@ -1,18 +1,35 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { DateFormatterService } from '../../../shared/services/date-formatter.service';
-import { FULL_NAVIGATION_PATHS } from '../../../shared/constants/navigation-path';
+import { Injectable } from '@angular/core';
+import { Order } from '../interfaces/order.interface';
 
-@Component({
-  selector: 'orders-page',
-  imports: [RouterLink],
-  templateUrl: './orders-page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+export enum OrderType {
+  RADIOGRAPHY = 'RADIOGRAPHY',
+  LABORATORY = 'LABORATORY',
+}
+
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
+
+export const ORDER_TYPE_OPTIONS = [
+  { value: OrderType.RADIOGRAPHY, label: 'Radiografía' },
+  { value: OrderType.LABORATORY, label: 'Laboratorio' },
+];
+
+export const ORDER_STATUS_OPTIONS = [
+  { value: OrderStatus.PENDING, label: 'Pendiente' },
+  { value: OrderStatus.IN_PROGRESS, label: 'En Progreso' },
+  { value: OrderStatus.COMPLETED, label: 'Completado' },
+  { value: OrderStatus.CANCELLED, label: 'Cancelado' },
+];
+
+@Injectable({
+  providedIn: 'root',
 })
-export default class OrdersPage {
-  dateFormatterService = DateFormatterService;
-
-  orders = signal<any[]>([
+export class OrderService {
+  orders: Order[] = [
     {
       id: 1,
       orderType: 'RADIOGRAPHY',
@@ -24,7 +41,7 @@ export default class OrdersPage {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        role: 'DOCTOR',
+        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -46,7 +63,7 @@ export default class OrdersPage {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        role: 'DOCTOR',
+        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -68,7 +85,7 @@ export default class OrdersPage {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        role: 'DOCTOR',
+        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -80,7 +97,7 @@ export default class OrdersPage {
       },
     },
     {
-      id: 3,
+      id: 4,
       orderType: 'RADIOGRAPHY',
       status: 'CANCELLED',
       orderDate: '2025-10-02T03:29:55.627Z',
@@ -90,7 +107,7 @@ export default class OrdersPage {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        role: 'DOCTOR',
+        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -101,17 +118,27 @@ export default class OrdersPage {
         notes: 'Alérgico a la penicilina',
       },
     },
-  ]);
-
-  tableHeads = signal<string[]>([
-    'No.',
-    'Tipo de Orden',
-    'Estado',
-    'Paciente',
-    'Doctor',
-    'Fecha',
-    'Acciones',
-  ]);
-
-  orderUpdatePath = FULL_NAVIGATION_PATHS.ORDERS_UPDATE;
+  ];
+  order: Order = {
+    id: 1,
+    orderType: 'RADIOGRAPHY',
+    status: 'PENDING',
+    orderDate: '2025-10-02T03:29:55.627Z',
+    doctor: {
+      id: 1,
+      name: 'Dr. Juan Pérez',
+      email: 'juan.perez@example.com',
+      phone: '0991234567',
+      address: 'Calle 123, Ciudad, País',
+      specialty: 'DOCTOR',
+    },
+    patient: {
+      id: 1,
+      name: 'María González',
+      email: 'maria.gonzalez@example.com',
+      phone: '0991234567',
+      address: 'Calle 456, Ciudad, País',
+      notes: 'Alérgico a la penicilina',
+    },
+  };
 }

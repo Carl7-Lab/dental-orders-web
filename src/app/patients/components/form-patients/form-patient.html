@@ -1,0 +1,114 @@
+<div class="container mx-auto px-4 py-8">
+  <section class="w-full mx-auto">
+    <div class="card">
+      <h2 class="mb-6">Patient Form</h2>
+
+      <form class="space-y-6" [formGroup]="form()" (ngSubmit)="onSubmit()">
+        <div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Nombre</legend>
+            <label class="input">
+              <input
+                type="text"
+                formControlName="name"
+                placeholder="Ingrese el nombre del paciente"
+              />
+            </label>
+
+            @if (formUtils.isValidField(form(), 'name')) {
+            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'name') }}</span>
+            }
+          </fieldset>
+        </div>
+
+        <div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Email</legend>
+            <label class="input">
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="Ingrese el email del paciente"
+              />
+            </label>
+
+            @if (formUtils.isValidField(form(), 'email')) {
+            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'email') }}</span>
+            }
+          </fieldset>
+        </div>
+
+        <div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Teléfono</legend>
+            <label class="input">
+              <input
+                type="tel"
+                formControlName="phone"
+                placeholder="Ingrese el teléfono del paciente"
+              />
+            </label>
+
+            @if (formUtils.isValidField(form(), 'phone')) {
+            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'phone') }}</span>
+            }
+          </fieldset>
+        </div>
+
+        <div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Dirección</legend>
+            <label class="input">
+              <input
+                type="text"
+                formControlName="address"
+                placeholder="Ingrese la dirección del paciente"
+              />
+            </label>
+
+            @if (formUtils.isValidField(form(), 'address')) {
+            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'address') }}</span>
+            }
+          </fieldset>
+        </div>
+
+        <div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Notas</legend>
+            <label class="input">
+              <textarea
+                formControlName="notes"
+                placeholder="Ingrese notas adicionales del paciente"
+                rows="3"
+                class="resize-none"
+              ></textarea>
+            </label>
+
+            @if (formUtils.isValidField(form(), 'notes')) {
+            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'notes') }}</span>
+            }
+          </fieldset>
+        </div>
+
+        <div class="flex justify-center space-x-4">
+          <button type="button" class="btn btn-secondary" [routerLink]="cancelRoute()">
+            <span class="hidden sm:inline">Cancel</span>
+            <span class="sm:hidden">❌</span>
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="isSubmitBlocked()"
+            [class.opacity-50]="isSubmitBlocked()"
+            [class.cursor-not-allowed]="isSubmitBlocked()"
+          >
+            <span class="hidden sm:inline">{{
+              isSubmitBlocked() ? 'Processing...' : submitButtonText()
+            }}</span>
+            <span class="sm:hidden">{{ isSubmitBlocked() ? '⏳' : '👤' }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
