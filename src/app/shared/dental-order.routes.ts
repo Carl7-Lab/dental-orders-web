@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import NotFoundPage from './pages/not-found/not-found-page';
 import OrdersPage from '../orders/pages/orders-list/orders-page';
 import PatientsPage from '../patients/pages/patients-list/patients-page';
 import DoctorsPage from '../doctors/pages/doctors-list/doctors-page';
@@ -14,32 +13,7 @@ import { UpdateDoctor } from '../doctors/pages/doctor-update/doctor-update';
 import { CreatePatient } from '../patients/pages/patient-create/patient-create';
 import { UpdatePatient } from '../patients/pages/patient-update/patient-update';
 
-export const frontRoutes: Routes = [
-  {
-    path: '',
-    component: OrdersLayout,
-    children: [
-      {
-        path: '',
-        redirectTo: NAVIGATION_PATHS.ORDERS,
-        pathMatch: 'full',
-      },
-      {
-        path: NAVIGATION_PATHS.ORDERS,
-        component: OrdersPage,
-        children: [
-          {
-            path: NAVIGATION_PATHS.ORDERS_CREATE,
-            component: CreateOrder,
-          },
-          {
-            path: NAVIGATION_PATHS.ORDERS_UPDATE,
-            component: UpdateOrder,
-          },
-        ],
-      },
-    ],
-  },
+export const publicRoutes: Routes = [
   {
     path: NAVIGATION_PATHS.PATIENTS,
     component: PatientsLayout,
@@ -81,9 +55,30 @@ export const frontRoutes: Routes = [
     ],
   },
   {
-    path: '**',
-    component: NotFoundPage,
+    path: '',
+    component: OrdersLayout,
+    children: [
+      {
+        path: '',
+        redirectTo: NAVIGATION_PATHS.ORDERS,
+        pathMatch: 'full',
+      },
+      {
+        path: NAVIGATION_PATHS.ORDERS,
+        component: OrdersPage,
+        children: [
+          {
+            path: NAVIGATION_PATHS.ORDERS_CREATE,
+            component: CreateOrder,
+          },
+          {
+            path: NAVIGATION_PATHS.ORDERS_UPDATE,
+            component: UpdateOrder,
+          },
+        ],
+      },
+    ],
   },
 ];
 
-export default frontRoutes;
+export default publicRoutes;

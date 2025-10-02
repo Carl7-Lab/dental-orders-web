@@ -1,0 +1,51 @@
+<div class="py-8 px-4">
+  <div class="container mx-auto max-w-2xl">
+    <page-header
+      title="Iniciar Sesión"
+      subtitle="Ingresa tus credenciales para acceder al sistema"
+      iconName="LOGIN"
+    />
+
+    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+      <form-header title="Credenciales de Acceso" iconName="USER" />
+
+      <div class="p-8">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-2">
+          <div class="space-y-6">
+            <form-text
+              [form]="form"
+              fieldName="email"
+              label="Email"
+              placeholder="Ingrese su email"
+              inputType="email"
+              iconName="EMAIL"
+              [formUtils]="formUtils"
+            />
+
+            <form-text
+              [form]="form"
+              fieldName="password"
+              label="Contraseña"
+              placeholder="Ingrese su contraseña"
+              inputType="password"
+              iconName="LOCK"
+              [formUtils]="formUtils"
+            />
+          </div>
+
+          <form-actions
+            [cancelRoute]="cancelRoute"
+            [submitText]="submitButtonText"
+            [isLoading]="isLoading()"
+            [isSubmitDisabled]="isSubmitBlocked()"
+            cancelText="Registrarse"
+            cancelTextMobile="Registro"
+            cancelIcon="USER_PLUS"
+            submitIcon="LOGIN"
+            (onSubmit)="onSubmit()"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

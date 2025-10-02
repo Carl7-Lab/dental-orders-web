@@ -1,5 +1,4 @@
 export const ICONS = {
-  // Icono principal del documento (ya usado)
   DOCUMENT: {
     div: {
       class: '',
@@ -257,6 +256,57 @@ export const ICONS = {
       strokeLinejoin: 'round',
       strokeWidth: '2',
       d: 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
+    },
+  },
+  LOGIN: {
+    div: {
+      class: '',
+    },
+    svg: {
+      class: 'w-4 h-4 text-primary',
+      fill: 'none',
+      stroke: 'currentColor',
+      viewBox: '0 0 24 24',
+    },
+    path: {
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2',
+      d: 'M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1',
+    },
+  },
+  LOCK: {
+    div: {
+      class: '',
+    },
+    svg: {
+      class: 'w-4 h-4 text-primary',
+      fill: 'none',
+      stroke: 'currentColor',
+      viewBox: '0 0 24 24',
+    },
+    path: {
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2',
+      d: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+    },
+  },
+  USER_PLUS: {
+    div: {
+      class: '',
+    },
+    svg: {
+      class: 'w-4 h-4 text-primary',
+      fill: 'none',
+      stroke: 'currentColor',
+      viewBox: '0 0 24 24',
+    },
+    path: {
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2',
+      d: 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z',
     },
   },
 } as const;
