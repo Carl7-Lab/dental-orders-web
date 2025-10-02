@@ -13,11 +13,11 @@ export class FormPatientService {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(10)]],
-      address: ['', [Validators.required, Validators.minLength(5)]],
-      notes: ['', []], // Notes are optional
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      email: ['', [Validators.email, Validators.maxLength(100)]],
+      phone: ['', [Validators.pattern(/^\d{10}$/)]],
+      address: ['', [Validators.maxLength(200)]],
+      notes: ['', [Validators.maxLength(500)]],
     });
   }
 

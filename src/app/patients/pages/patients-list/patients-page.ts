@@ -17,7 +17,15 @@ export default class PatientsPage implements OnInit {
   router = inject(Router);
   currentRoute = signal<string>('');
 
-  tableHeads: string[] = ['No.', 'Nombre', 'Email', 'Teléfono', 'Dirección', 'Notas'];
+  tableHeads = signal<string[]>([
+    'No.',
+    'Nombre',
+    'Email',
+    'Teléfono',
+    'Dirección',
+    'Notas',
+    'Acciones',
+  ]);
 
   ngOnInit(): void {
     this.currentRoute.set(this.router.url);

@@ -1,57 +1,57 @@
-<div class="container mx-auto px-4 py-0 flex flex-col md:flex-row gap-x-4">
+<div
+  class="max-w-[1000px] mx-auto px-0 py-0 flex flex-col md:flex-row {{
+    currentRoute() === navigationPaths.PATIENTS_LIST ? '' : 'gap-x-4'
+  }}"
+>
   <div class=" {{ currentRoute() === navigationPaths.PATIENTS_LIST ? '' : 'flex-1' }}">
     <router-outlet />
   </div>
 
   <div
-    class="text-center mb-8 {{
+    class="text-center {{
       currentRoute() === navigationPaths.PATIENTS_LIST ? 'flex-1' : 'hidden'
     }} px-4 py-8"
   >
-    <div class="flex items-center justify-center px-4">
-      <div class="max-w-6xl mx-auto">
-        <div
-          class="overflow-x-auto rounded-lg border-2 border-base-content/20 bg-base-100 shadow-lg"
-        >
-          <table class="table">
-            <thead>
-              <tr>
-                @for (head of tableHeads; track head) {
-                <th>{{ head }}</th>
-                }
-              </tr>
-            </thead>
-            <tbody>
-              @for (patient of patients; track patient.id; let i = $index) {
-              <tr>
-                <th>{{ i + 1 }}</th>
-                <td>{{ patient.name }}</td>
-                <td>{{ patient.email }}</td>
-                <td>{{ patient.phone }}</td>
-                <td>{{ patient.address }}</td>
-                <td>{{ patient.notes }}</td>
-                <td>
-                  <button
-                    class="btn"
-                    [attr.popovertarget]="'popover-' + i"
-                    [style.anchor-name]="'--anchor-' + i"
-                  >
-                    ...
-                  </button>
-                  <ul
-                    class="dropdown menu w-[150px] rounded-box bg-base-100 shadow-sm"
-                    popover
-                    [id]="'popover-' + i"
-                    [style.position-anchor]="'--anchor-' + i"
-                  >
-                    <li><a [routerLink]="[patientUpdatePath, patient.id]">Editar</a></li>
-                  </ul>
-                </td>
-              </tr>
+    <div class="min-[768px]:max-w-[704px] min-[1000px]:max-w-[930px] mx-auto">
+      <div class="overflow-x-auto rounded-lg border-2 border-base-content/20 bg-base-100 shadow-lg">
+        <table class="table">
+          <thead>
+            <tr>
+              @for (head of tableHeads(); track head) {
+              <th>{{ head }}</th>
               }
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            @for (patient of patients; track patient.id; let i = $index) {
+            <tr>
+              <th>{{ i + 1 }}</th>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.email }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>{{ patient.address }}</td>
+              <td>{{ patient.notes }}</td>
+              <td>
+                <button
+                  class="btn"
+                  [attr.popovertarget]="'popover-' + i"
+                  [style.anchor-name]="'--anchor-' + i"
+                >
+                  ...
+                </button>
+                <ul
+                  class="dropdown menu w-[150px] rounded-box bg-base-100 shadow-sm"
+                  popover
+                  [id]="'popover-' + i"
+                  [style.position-anchor]="'--anchor-' + i"
+                >
+                  <li><a [routerLink]="[patientUpdatePath, patient.id]">Editar</a></li>
+                </ul>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

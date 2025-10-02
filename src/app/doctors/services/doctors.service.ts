@@ -12,7 +12,6 @@ export class DoctorService {
       email: 'juan.perez@example.com',
       phone: '0991234567',
       address: 'Calle 123, Ciudad, País',
-      specialty: 'Ortodoncista',
     },
     {
       id: 2,
@@ -20,7 +19,6 @@ export class DoctorService {
       email: 'maria.gonzalez@example.com',
       phone: '0991234567',
       address: 'Calle 123, Ciudad, País',
-      specialty: 'Ortodoncista',
     },
     {
       id: 3,
@@ -28,7 +26,6 @@ export class DoctorService {
       email: 'juan.perez@example.com',
       phone: '0991234567',
       address: 'Calle 123, Ciudad, País',
-      specialty: 'Ortodoncista',
     },
   ];
   doctor: Doctor | null = {
@@ -37,6 +34,5 @@ export class DoctorService {
     email: 'juan.perez@example.com',
     phone: '0991234567',
     address: 'Calle 123, Ciudad, País',
-    specialty: 'Ortodoncista',
   };
 }

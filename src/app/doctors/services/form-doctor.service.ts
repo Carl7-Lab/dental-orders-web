@@ -13,11 +13,11 @@ export class FormDoctorService {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(10)]],
-      address: ['', [Validators.required, Validators.minLength(5)]],
-      specialty: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
+      phone: ['', [Validators.pattern(/^\d{10}$/)]],
+      address: ['', [Validators.maxLength(100)]],
     });
   }
 
@@ -28,7 +28,6 @@ export class FormDoctorService {
         email: doctor.email,
         phone: doctor.phone,
         address: doctor.address,
-        specialty: doctor.specialty,
       });
     }
   }

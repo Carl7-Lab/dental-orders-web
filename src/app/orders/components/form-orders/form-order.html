@@ -1,105 +1,81 @@
-<div class="container mx-auto px-4 py-8">
-  <section class="w-full mx-auto">
-    <div class="card">
-      <h2 class="mb-6">Orden Form</h2>
+<div class="py-8 px-4">
+  <div class="container mx-auto max-w-4xl">
+    <page-header
+      title="Crear Nueva Orden"
+      subtitle="Complete la información para crear una nueva orden dental"
+      iconName="DOCUMENT"
+    />
 
-      <form class="space-y-6" [formGroup]="form()" (ngSubmit)="onSubmit()">
-        <div>
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Tipo de orden</legend>
-            <select class="select" formControlName="orderType">
-              <option disabled selected value="">Seleccione un tipo</option>
-              @for( type of typeOptions; track type ){
-              <option value="{{ type.value }}">{{ type.label }}</option>
-              }
-            </select>
+    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+      <form-header title="Formulario de Orden" iconName="EDIT" />
 
-            @if (formUtils.isValidField(form(), 'orderType')) {
-            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'orderType') }}</span>
-            }
-          </fieldset>
-        </div>
+      <div class="p-8">
+        <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <form-select
+              [form]="form()"
+              fieldName="orderType"
+              label="Tipo de Orden"
+              placeholder="Seleccione un tipo"
+              [options]="typeOptions"
+              iconName="TAG"
+              [formUtils]="formUtils"
+            />
 
-        <div>
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Status</legend>
-            <select class="select" formControlName="status">
-              <option disabled selected value="">Seleccione el status</option>
-              @for( status of statusOptions; track status ){
-              <option value="{{ status.value }}">{{ status.label }}</option>
-              }
-            </select>
+            <form-select
+              [form]="form()"
+              fieldName="status"
+              label="Estado"
+              placeholder="Seleccione el estado"
+              [options]="statusOptions"
+              iconName="CHECK_CIRCLE"
+              [formUtils]="formUtils"
+            />
 
-            @if (formUtils.isValidField(form(), 'status')) {
-            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'status') }}</span>
-            }
-          </fieldset>
-        </div>
+            <form-date
+              [form]="form()"
+              fieldName="orderDate"
+              label="Fecha de la Orden"
+              iconName="CALENDAR"
+              [formUtils]="formUtils"
+            >
+            </form-date>
 
-        <div>
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Fecha de la orden</legend>
-            <label class="input">
-              <input type="date" formControlName="orderDate" />
-            </label>
+            <form-select
+              [form]="form()"
+              fieldName="patientId"
+              label="Paciente"
+              placeholder="Seleccione el paciente"
+              [options]="patientOptions()"
+              iconName="USER"
+              [formUtils]="formUtils"
+            />
 
-            @if (formUtils.isValidField(form(), 'orderDate')) {
-            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'orderDate') }}</span>
-            }
-          </fieldset>
-        </div>
+            <form-select
+              [form]="form()"
+              fieldName="doctorId"
+              label="Doctor"
+              placeholder="Seleccione el doctor"
+              [options]="doctorOptions()"
+              iconName="DOCUMENT"
+              [formUtils]="formUtils"
+            />
+          </div>
 
-        <div>
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Paciente</legend>
-            <select class="select" formControlName="patientId">
-              <option disabled selected value="">Seleccione el paciente</option>
-              @for( patient of patients; track patient ){
-              <option value="{{ patient.id }}">{{ patient.name }}</option>
-              }
-            </select>
-
-            @if (formUtils.isValidField(form(), 'patientId')) {
-            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'patientId') }}</span>
-            }
-          </fieldset>
-        </div>
-
-        <div>
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Doctor</legend>
-            <select class="select" formControlName="doctorId">
-              <option disabled selected value="">Seleccione el doctor</option>
-              @for( doctor of doctors; track doctor ){
-              <option value="{{ doctor.id }}">{{ doctor.name }}</option>
-              }
-            </select>
-
-            @if (formUtils.isValidField(form(), 'doctorId')) {
-            <span class="text-red-500">{{ formUtils.getFieldError(form(), 'doctorId') }}</span>
-            }
-          </fieldset>
-        </div>
-
-        <div class="flex justify-center space-x-4">
-          <button type="button" class="btn btn-secondary" [routerLink]="cancelRoute()">
-            <span class="hidden sm:inline">Cancel</span>
-            <span class="sm:hidden">❌</span>
-          </button>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            [disabled]="isSubmitBlocked()"
-            [class.opacity-50]="isSubmitBlocked()"
-            [class.cursor-not-allowed]="isSubmitBlocked()"
-          >
-            <span class="hidden sm:inline">{{
-              isSubmitBlocked() ? 'Processing...' : submitButtonText()
-            }}</span>
-            <span class="sm:hidden">{{ isSubmitBlocked() ? '⏳' : '👑' }}</span>
-          </button>
-        </div>
-      </form>
+          <form-actions
+            [cancelRoute]="cancelRoute()"
+            [submitText]="submitButtonText()"
+            [isLoading]="isSubmitBlocked()"
+            (onSubmit)="onSubmit()"
+          />
+        </form>
+      </div>
     </div>
-  </section>
+
+    <div class="text-center mt-8">
+      <p class="text-base-content/60 text-sm">
+        Complete todos los campos requeridos para crear la orden
+      </p>
+    </div>
+  </div>
 </div>

@@ -1,12 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { input, output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { FormUtils } from '../../../shared/services/form-valid.service';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { FormHeaderComponent } from '../../../shared/components/form/form-header/form-header.component';
+import { FormTextComponent } from '../../../shared/components/form/form-text/form-text.component';
+import { FormTextareaComponent } from '../../../shared/components/form/form-textarea/form-textarea.component';
+import { FormActionsComponent } from '../../../shared/components/form/form-actions/form-actions.component';
 
 @Component({
   selector: 'form-patient',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    PageHeaderComponent,
+    FormHeaderComponent,
+    FormTextComponent,
+    FormTextareaComponent,
+    FormActionsComponent,
+  ],
   templateUrl: './form-patient.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -41,7 +41,6 @@ export class OrderService {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -63,7 +62,6 @@ export class OrderService {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -85,7 +83,6 @@ export class OrderService {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -107,7 +104,6 @@ export class OrderService {
         email: 'juan.perez@example.com',
         phone: '0991234567',
         address: 'Calle 123, Ciudad, País',
-        specialty: 'DOCTOR',
       },
       patient: {
         id: 1,
@@ -130,7 +126,6 @@ export class OrderService {
       email: 'juan.perez@example.com',
       phone: '0991234567',
       address: 'Calle 123, Ciudad, País',
-      specialty: 'DOCTOR',
     },
     patient: {
       id: 1,

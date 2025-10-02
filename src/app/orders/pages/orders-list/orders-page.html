@@ -1,15 +1,18 @@
-<div class="container mx-auto px-4 py-0 flex flex-col md:flex-row gap-x-4">
+<div
+  class="max-w-[1000px] mx-auto px-0 py-0 flex flex-col md:flex-row {{
+    currentRoute() === navigationPaths.ORDERS_LIST ? '' : 'gap-x-4'
+  }}"
+>
   <div class=" {{ currentRoute() === navigationPaths.ORDERS_LIST ? '' : 'flex-1' }}">
     <router-outlet />
   </div>
 
   <div
-    class="text-center mb-8 {{
+    class="text-center {{
       currentRoute() === navigationPaths.ORDERS_LIST ? 'flex-1' : 'hidden'
     }} px-4 py-8"
   >
-    <div class="flex items-center justify-center px-4"></div>
-    <div class="max-w-6xl mx-auto">
+    <div class="min-[768px]:max-w-[704px] min-[1000px]:max-w-[930px] mx-auto">
       <div class="overflow-x-auto rounded-lg border-2 border-base-content/20 bg-base-100 shadow-lg">
         <table class="table">
           <thead>
