@@ -1,1 +1,45 @@
 @import 'tailwindcss';
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@plugin "daisyui/theme" {
+  name: 'clinic';
+  default: true;
+  prefersdark: true;
+  color-scheme: 'light';
+  --color-base-100: oklch(97% 0.013 236.62);
+  --color-base-200: oklch(95% 0.026 236.824);
+  --color-base-300: oklch(90% 0.058 230.902);
+  --color-base-content: oklch(39% 0.09 240.876);
+  --color-primary: oklch(44% 0.017 285.786);
+  --color-primary-content: oklch(98% 0 0);
+  --color-secondary: oklch(66% 0.179 58.318);
+  --color-secondary-content: oklch(98% 0.022 95.277);
+  --color-accent: oklch(59% 0.249 0.584);
+  --color-accent-content: oklch(97% 0.014 343.198);
+  --color-neutral: oklch(58% 0.158 241.966);
+  --color-neutral-content: oklch(97% 0.013 236.62);
+  --color-info: oklch(54% 0.245 262.881);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(64% 0.2 131.684);
+  --color-success-content: oklch(98% 0.031 120.757);
+  --color-warning: oklch(68% 0.162 75.834);
+  --color-warning-content: oklch(98% 0.026 102.212);
+  --color-error: oklch(57% 0.245 27.325);
+  --color-error-content: oklch(97% 0.013 17.38);
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 1;
+}
+
+/* Estilos para indicador de página activa en navbar - Tema Corporate */
+.navbar .menu a.active {
+  @apply bg-primary text-primary-content font-semibold shadow-sm;
+  border-radius: var(--radius-field);
+}

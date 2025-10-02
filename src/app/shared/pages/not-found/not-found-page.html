@@ -1,0 +1,54 @@
+<div class="min-h-[calc(100vh-73px)] bg-base-200 flex items-center justify-center px-4">
+  <div class="max-w-2xl mx-auto text-center">
+    <div class="mb-8">
+      <div class="relative">
+        <h1 class="text-9xl font-bold text-primary opacity-20">404</h1>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="bg-primary text-primary-content rounded-full p-6 shadow-lg">
+            <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5V8.5L21 9ZM3 9L9 8.5V6.5L3 7V9ZM12 8C13.1 8 14 8.9 14 10V12H16V22H8V12H10V10C10 8.9 10.9 8 12 8ZM6 12V22H4V12H6ZM18 12V22H20V12H18Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-base-content mb-4">¡Página no encontrada!</h2>
+      <p class="text-lg text-base-content/70 mb-2">
+        Lo sentimos, la página que estás buscando no existe o ha sido movida.
+      </p>
+      <p class="text-base text-base-content/60">
+        Puede que hayas escrito mal la URL o que el enlace esté roto.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <button (click)="goHome()" class="btn btn-primary btn-lg px-8 gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+        Volver al inicio
+      </button>
+
+      <button (click)="goBack()" class="btn btn-outline btn-lg px-8 gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        Página anterior
+      </button>
+    </div>
+  </div>
+</div>
