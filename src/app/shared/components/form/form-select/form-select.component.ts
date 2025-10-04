@@ -30,9 +30,9 @@ export interface SelectOption {
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <app-icon name="CHEVRON_DOWN" [size]="chevronSize"></app-icon>
         </div>
+        <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
+        </app-error-message>
       </div>
-      <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
-      </app-error-message>
     </div>
   `,
   imports: [ReactiveFormsModule, IconComponent, ErrorMessageComponent],

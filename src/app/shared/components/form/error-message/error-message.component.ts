@@ -7,7 +7,7 @@ import { IconComponent } from '../../icon/icon.component';
   standalone: true,
   template: `
     @if (showError) {
-    <div class="flex items-center gap-2 text-error text-sm mt-2">
+    <div class="flex items-center gap-2 text-error text-sm mt-0">
       <app-icon name="ERROR" [size]="iconSize"></app-icon>
       {{ errorMessage }}
     </div>

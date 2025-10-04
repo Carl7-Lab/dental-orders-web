@@ -10,6 +10,8 @@ export class FormUtils {
       switch (key) {
         case 'required':
           return 'Este campo es requerido';
+        case 'email':
+          return 'Este campo debe ser un email válido';
         case 'minlength':
           return `Este campo debe tener al menos ${errors[key].requiredLength} caracteres`;
         case 'maxlength':

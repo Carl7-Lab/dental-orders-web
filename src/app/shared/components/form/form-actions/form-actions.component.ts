@@ -25,7 +25,7 @@ import { IconComponent } from '../../icon/icon.component';
         (click)="onSubmit.emit()"
       >
         @if (isLoading) {
-        <app-icon [name]="loadingIcon" [size]="iconSize"></app-icon>
+        <span class="loading loading-spinner {{ iconSize }}"></span>
         <span>{{ loadingText }}</span>
         } @else {
         <app-icon [name]="submitIcon" [size]="iconSize"></app-icon>

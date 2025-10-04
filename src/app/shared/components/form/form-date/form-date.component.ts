@@ -19,9 +19,9 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
           [formControlName]="fieldName"
           [placeholder]="placeholder"
         />
+        <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
+        </app-error-message>
       </div>
-      <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
-      </app-error-message>
     </div>
   `,
   imports: [ReactiveFormsModule, IconComponent, ErrorMessageComponent],
