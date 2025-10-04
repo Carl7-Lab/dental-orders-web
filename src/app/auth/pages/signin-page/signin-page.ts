@@ -8,6 +8,7 @@ import { FormActionsComponent } from '../../../shared/components/form/form-actio
 import { FULL_NAVIGATION_PATHS } from '../../../shared/constants/navigation-path';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'signin-page',
@@ -25,6 +26,7 @@ export default class SignInPage {
   authService = inject(AuthService);
   formBuilder = inject(FormBuilder);
   router = inject(Router);
+  toastService = inject(ToastService);
   formUtils = FormUtils;
 
   isSubmitBlocked = signal(false);
@@ -51,7 +53,7 @@ export default class SignInPage {
           // TODO: Redirigir a la página de inicio
           this.router.navigate([FULL_NAVIGATION_PATHS.ORDERS_LIST]);
         } else {
-          console.error('El email o la contraseña son incorrectos');
+          this.toastService.error('El email o la contraseña son incorrectos');
         }
       },
       complete: () => {
