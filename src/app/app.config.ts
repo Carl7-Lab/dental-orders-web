@@ -6,7 +6,9 @@ import {
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './auth/interceptors/auth.interceptor';
+import { cleanBodyInterceptor } from './shared/interceptors/clean-body.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +21,6 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       })
     ),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([cleanBodyInterceptor, authInterceptor])),
   ],
 };

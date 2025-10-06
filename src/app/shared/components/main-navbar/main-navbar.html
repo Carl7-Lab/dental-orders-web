@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow-sm px-4">
+<div class="navbar bg-base-100 shadow-sm px-2 sm:px-4">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -19,45 +19,102 @@
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
       >
         <li>
-          <a [routerLink]="ordersPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-            >Ordenes</a
+          <a
+            [routerLink]="ordersPath"
+            [routerLinkActive]="['active']"
+            class="btn btn-ghost justify-start"
           >
+            Ordenes
+          </a>
         </li>
         <li>
-          <a [routerLink]="patientsPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-            >Pacientes</a
+          <a
+            [routerLink]="patientsPath"
+            [routerLinkActive]="['active']"
+            class="btn btn-ghost justify-start"
           >
+            Pacientes
+          </a>
         </li>
         <li>
-          <a [routerLink]="doctorsPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-            >Doctores</a
+          <a
+            [routerLink]="doctorsPath"
+            [routerLinkActive]="['active']"
+            class="btn btn-ghost justify-start"
           >
+            Doctores
+          </a>
         </li>
       </ul>
     </div>
-    <a [routerLink]="ordersPath" class="text-xl">Dental Orders Web</a>
+
+    <a [routerLink]="ordersPath" class="text-lg sm:text-xl font-semibold truncate">
+      <span class="hidden sm:inline">Dental Orders Web</span>
+      <span class="sm:hidden">Dental Orders</span>
+    </a>
   </div>
+
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <a [routerLink]="ordersPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-          >Ordenes</a
-        >
+        <a [routerLink]="ordersPath" [routerLinkActive]="['active']" class="btn btn-ghost">
+          Ordenes
+        </a>
       </li>
       <li>
-        <a [routerLink]="patientsPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-          >Pacientes</a
-        >
+        <a [routerLink]="patientsPath" [routerLinkActive]="['active']" class="btn btn-ghost">
+          Pacientes
+        </a>
       </li>
       <li>
-        <a [routerLink]="doctorsPath" [routerLinkActive]="['active']" class="btn btn-ghost"
-          >Doctores</a
-        >
+        <a [routerLink]="doctorsPath" [routerLinkActive]="['active']" class="btn btn-ghost">
+          Doctores
+        </a>
       </li>
     </ul>
   </div>
-  <div class="navbar-end"></div>
+
+  <div class="navbar-end">
+    @if (authService.authStatus() === authStatus.AUTHENTICATED) {
+    <div class="hidden sm:flex items-center gap-2">
+      <div class="flex items-center gap-2 px-3 py-2 bg-base-200 rounded-lg">
+        <div class="avatar placeholder">
+          <div class="bg-primary text-primary-content text-center rounded-full w-8 h-8">
+            <span class="text-[20px] font-medium">
+              {{ authService.user()?.name?.charAt(0)?.toUpperCase() }}
+            </span>
+          </div>
+        </div>
+        <span class="text-sm font-medium text-base-content">
+          {{ authService.user()?.name }}
+        </span>
+      </div>
+      <button class="btn btn-outline btn-sm" (click)="authService.logout()">
+        <app-icon name="logout" size="sm"></app-icon>
+        Cerrar Sesión
+      </button>
+    </div>
+
+    <div class="sm:hidden flex items-center gap-1">
+      <div class="avatar placeholder">
+        <div class="bg-primary text-primary-content text-center rounded-full w-8 h-8">
+          <span class="text-[20px] font-medium">
+            {{ authService.user()?.name?.charAt(0)?.toUpperCase() }}
+          </span>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm p-1" (click)="authService.logout()" title="Cerrar Sesión">
+        <app-icon name="logout" size="md"></app-icon>
+      </button>
+    </div>
+    } @else {
+    <div class="flex items-center gap-2">
+      <span class="loading loading-spinner loading-sm"></span>
+      <span class="text-sm text-base-content/70 hidden sm:inline">Verificando...</span>
+    </div>
+    }
+  </div>
 </div>

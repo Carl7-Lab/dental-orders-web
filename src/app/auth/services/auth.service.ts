@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment.development';
 import { AuthResponse } from '../interfaces/auth-response.interface';
 import { JwtService } from './jwt.service';
 import { catchError, map, Observable, of, tap } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { Doctor } from '../../doctors/interfaces/doctor.interface';
 
 export enum AuthStatus {
   CHECKING = 'checking',
@@ -32,6 +34,10 @@ export class AuthService {
   private http = inject(HttpClient);
   private jwtService = inject(JwtService);
 
+  checkStatusResource = rxResource({
+    stream: () => this.checkAuthStatus(),
+  });
+
   authStatus = computed<AuthStatus>(() => {
     if (this._authStatus() === AuthStatus.CHECKING) {
       return AuthStatus.CHECKING;
@@ -51,26 +57,48 @@ export class AuthService {
   login({ email, password }: { email: string; password: string }): Observable<boolean> {
     return this.http.post<AuthResponse>(`${API_URL}/auth/local/signin`, { email, password }).pipe(
       tap((response) => {
-        this._authStatus.set(AuthStatus.AUTHENTICATED);
-        this._accessToken.set(response.accessToken);
-        this._refreshToken.set(response.refreshToken);
-
-        localStorage.setItem('accessToken', response.accessToken);
-        localStorage.setItem('refreshToken', response.refreshToken);
-
-        const user = this.jwtService.getUserFromToken(response.accessToken);
-        if (user) {
-          this._user.set(user);
-        }
+        this.handleAuthSuccess(response);
       }),
       map((_response) => {
         return true;
       }),
       catchError((_error) => {
-        this.logout();
+        this.handleAuthFailure(_error);
         return of(false);
       })
     );
+  }
+
+  checkAuthStatus(): Observable<boolean> {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (refreshToken) {
+      return this.http
+        .post<AuthResponse>(
+          `${API_URL}/auth/refresh`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${refreshToken}`,
+            },
+          }
+        )
+        .pipe(
+          tap((response) => {
+            this.handleAuthSuccess(response);
+          }),
+          map((_response) => {
+            return true;
+          }),
+          catchError((_error) => {
+            console.error('Error refreshing token', _error);
+            this.handleAuthFailure(_error);
+            return of(false);
+          })
+        );
+    }
+
+    return of(false);
   }
 
   logout() {
@@ -81,5 +109,39 @@ export class AuthService {
 
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+  }
+
+  register(user: Doctor): Observable<boolean> {
+    return this.http.post<AuthResponse>(`${API_URL}/auth/local/signup`, user).pipe(
+      tap((response) => {
+        this.handleAuthSuccess(response);
+      }),
+      map((_response) => {
+        return true;
+      }),
+      catchError((_error) => {
+        this.handleAuthFailure(_error);
+        return of(false);
+      })
+    );
+  }
+
+  private handleAuthSuccess(response: AuthResponse) {
+    this._authStatus.set(AuthStatus.AUTHENTICATED);
+    this._accessToken.set(response.accessToken);
+    this._refreshToken.set(response.refreshToken);
+
+    localStorage.setItem('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+
+    const user = this.jwtService.getUserFromToken(response.accessToken);
+    if (user) {
+      this._user.set(user);
+    }
+  }
+
+  private handleAuthFailure(_error: any) {
+    this.logout();
+    return of(false);
   }
 }

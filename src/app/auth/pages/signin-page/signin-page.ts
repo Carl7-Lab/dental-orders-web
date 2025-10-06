@@ -50,8 +50,7 @@ export default class SignInPage {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         if (response) {
-          // TODO: Redirigir a la página de inicio
-          this.router.navigate([FULL_NAVIGATION_PATHS.ORDERS_LIST]);
+          this.router.navigate([FULL_NAVIGATION_PATHS.DASHBOARD]);
         } else {
           this.toastService.error('El email o la contraseña son incorrectos');
         }

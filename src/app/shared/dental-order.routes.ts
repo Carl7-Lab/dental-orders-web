@@ -12,6 +12,7 @@ import { CreateDoctor } from '../doctors/pages/doctor-create/doctor-create';
 import { UpdateDoctor } from '../doctors/pages/doctor-update/doctor-update';
 import { CreatePatient } from '../patients/pages/patient-create/patient-create';
 import { UpdatePatient } from '../patients/pages/patient-update/patient-update';
+import DashboardPage from '../dashboard/page/dashboard-page';
 
 export const publicRoutes: Routes = [
   {
@@ -55,16 +56,11 @@ export const publicRoutes: Routes = [
     ],
   },
   {
-    path: '',
+    path: NAVIGATION_PATHS.ORDERS,
     component: OrdersLayout,
     children: [
       {
         path: '',
-        redirectTo: NAVIGATION_PATHS.ORDERS,
-        pathMatch: 'full',
-      },
-      {
-        path: NAVIGATION_PATHS.ORDERS,
         component: OrdersPage,
         children: [
           {
@@ -78,6 +74,15 @@ export const publicRoutes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: '',
+    redirectTo: NAVIGATION_PATHS.DASHBOARD,
+    pathMatch: 'full',
+  },
+  {
+    path: NAVIGATION_PATHS.DASHBOARD,
+    component: DashboardPage,
   },
 ];
 
