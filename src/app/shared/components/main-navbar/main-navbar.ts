@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FULL_NAVIGATION_PATHS } from '../../constants/navigation-path';
 import { IconComponent } from '../icon/icon.component';
 import { AuthService, AuthStatus } from '../../../public/auth/services/auth.service';
@@ -12,9 +12,24 @@ import { AuthService, AuthStatus } from '../../../public/auth/services/auth.serv
 })
 export default class MainNavbar {
   authService = inject(AuthService);
+  router = inject(Router);
   authStatus = AuthStatus;
 
-  ordersPath = FULL_NAVIGATION_PATHS.ORDERS_LIST;
-  patientsPath = FULL_NAVIGATION_PATHS.PATIENTS_LIST;
-  doctorsPath = FULL_NAVIGATION_PATHS.DOCTORS_LIST;
+  dashboardPath = FULL_NAVIGATION_PATHS.DASHBOARD;
+
+  menuItems = [
+    {
+      label: 'Pacientes',
+      path: FULL_NAVIGATION_PATHS.PATIENTS_LIST,
+    },
+    {
+      label: 'Usuarios',
+      path: FULL_NAVIGATION_PATHS.USERS_LIST,
+    },
+  ];
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl(FULL_NAVIGATION_PATHS.AUTH_SIGN_IN);
+  }
 }

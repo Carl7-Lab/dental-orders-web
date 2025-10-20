@@ -8,14 +8,14 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
   standalone: true,
   template: `
     <div class="space-y-3" [formGroup]="form">
-      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-2">
+      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-1">
         <app-icon [name]="iconName" [size]="iconSize"></app-icon>
-        {{ label }}
+        {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
       </label>
       <div class="relative">
         <input
           type="date"
-          class="w-full px-4 py-3 bg-base-200 border-2 border-base-300 rounded-xl text-base-content focus:border-primary focus:bg-base-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20"
+          [class]="getInputClasses()"
           [formControlName]="fieldName"
           [placeholder]="placeholder"
         />
@@ -36,4 +36,21 @@ export class FormDateComponent {
   @Input() showCalendarIcon: boolean = true;
   @Input() calendarIconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
+  @Input() isRequired: boolean = false;
+
+  hasValue(): boolean {
+    const control = this.form.get(this.fieldName);
+    return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getInputClasses(): string {
+    const baseClasses =
+      'w-full px-4 py-3 border-2 rounded-xl focus:border-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/60 border-base-300 focus:bg-base-100 text-base-content`;
+    } else {
+      return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30`;
+    }
+  }
 }

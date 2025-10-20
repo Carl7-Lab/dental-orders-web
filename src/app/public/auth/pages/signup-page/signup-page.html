@@ -11,7 +11,7 @@
 
       <div class="p-8">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-2">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 gap-4">
             <form-text
               [form]="form"
               fieldName="name"
@@ -20,6 +20,7 @@
               inputType="text"
               iconName="USER"
               [formUtils]="formUtils"
+              [isRequired]="true"
             />
 
             <form-text
@@ -30,6 +31,7 @@
               inputType="email"
               iconName="EMAIL"
               [formUtils]="formUtils"
+              [isRequired]="true"
             />
 
             <form-text
@@ -40,26 +42,7 @@
               inputType="password"
               iconName="LOCK"
               [formUtils]="formUtils"
-            />
-
-            <form-text
-              [form]="form"
-              fieldName="phone"
-              label="Teléfono"
-              placeholder="Ingrese su teléfono (10 dígitos)"
-              inputType="tel"
-              iconName="PHONE"
-              [formUtils]="formUtils"
-            />
-
-            <form-text
-              [form]="form"
-              fieldName="address"
-              label="Dirección"
-              placeholder="Ingrese su dirección"
-              inputType="text"
-              iconName="LOCATION"
-              [formUtils]="formUtils"
+              [isRequired]="true"
             />
           </div>
 

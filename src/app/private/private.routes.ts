@@ -1,77 +1,25 @@
 import { Routes } from '@angular/router';
 import { NAVIGATION_PATHS } from '../shared/constants/navigation-path';
-import PatientsLayout from './patients/layouts/patients-layout';
-import PatientsPage from './patients/pages/patients-list/patients-page';
-import { CreatePatient } from './patients/pages/patient-create/patient-create';
-import { UpdatePatient } from './patients/pages/patient-update/patient-update';
-import DoctorsLayout from './doctors/layouts/doctors-layout';
-import DoctorsPage from './doctors/pages/doctors-list/doctors-page';
-import { CreateDoctor } from './doctors/pages/doctor-create/doctor-create';
-import { UpdateDoctor } from './doctors/pages/doctor-update/doctor-update';
-import OrdersLayout from './orders/layouts/orders-layout';
-import OrdersPage from './orders/pages/orders-list/orders-page';
-import { CreateOrder } from './orders/pages/order-create/order-create';
-import { UpdateOrder } from './orders/pages/order-update/order-update';
 import DashboardPage from './dashboard/page/dashboard-page';
+import UsersPage from './users/pages/users-list/users-page';
+import { CreateUser } from './users/pages/user-create/user-create';
+import { UpdateUser } from './users/pages/user-update/user-update';
 
 export const publicRoutes: Routes = [
   {
-    path: NAVIGATION_PATHS.PATIENTS,
-    component: PatientsLayout,
+    path: NAVIGATION_PATHS.USERS,
     children: [
       {
         path: '',
-        component: PatientsPage,
-        children: [
-          {
-            path: NAVIGATION_PATHS.PATIENTS_CREATE,
-            component: CreatePatient,
-          },
-          {
-            path: NAVIGATION_PATHS.PATIENTS_UPDATE,
-            component: UpdatePatient,
-          },
-        ],
+        component: UsersPage,
       },
-    ],
-  },
-  {
-    path: NAVIGATION_PATHS.DOCTORS,
-    component: DoctorsLayout,
-    children: [
       {
-        path: '',
-        component: DoctorsPage,
-        children: [
-          {
-            path: NAVIGATION_PATHS.DOCTORS_CREATE,
-            component: CreateDoctor,
-          },
-          {
-            path: NAVIGATION_PATHS.DOCTORS_UPDATE,
-            component: UpdateDoctor,
-          },
-        ],
+        path: NAVIGATION_PATHS.USERS_CREATE,
+        component: CreateUser,
       },
-    ],
-  },
-  {
-    path: NAVIGATION_PATHS.ORDERS,
-    component: OrdersLayout,
-    children: [
       {
-        path: '',
-        component: OrdersPage,
-        children: [
-          {
-            path: NAVIGATION_PATHS.ORDERS_CREATE,
-            component: CreateOrder,
-          },
-          {
-            path: NAVIGATION_PATHS.ORDERS_UPDATE,
-            component: UpdateOrder,
-          },
-        ],
+        path: NAVIGATION_PATHS.USERS_UPDATE,
+        component: UpdateUser,
       },
     ],
   },

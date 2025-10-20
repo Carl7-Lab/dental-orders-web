@@ -1,0 +1,18 @@
+<form-user
+  [form]="form"
+  pageTitle="Nuevo Usuario"
+  pageSubtitle="Agrega un nuevo usuario a tu cartera"
+  submitButtonText="Crear Usuario"
+  [cancelRoute]="usersListPath"
+  (formSubmit)="onSubmit()"
+></form-user>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar creación de usuario"
+  message="¿Estás seguro de que deseas crear este nuevo usuario?"
+  confirmText="Sí, crear usuario"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmCreate()"
+  (cancelled)="(onCancelCreate)"
+></confirmation-modal>

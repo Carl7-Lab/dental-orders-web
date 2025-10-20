@@ -1,12 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { User } from '../interfaces/user.interface';
+import { User } from '../../../private/users/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { AuthResponse } from '../interfaces/auth-response.interface';
 import { JwtService } from './jwt.service';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { Doctor } from '../../../private/doctors/interfaces/doctor.interface';
 
 export enum AuthStatus {
   CHECKING = 'checking',
@@ -15,9 +14,9 @@ export enum AuthStatus {
 }
 
 export enum Role {
-  ADMIN = 'admin',
-  DOCTOR = 'doctor',
-  INTERN = 'intern',
+  ADMIN = 'ADMIN',
+  DOCTOR = 'DOCTOR',
+  INTERN = 'INTERN',
 }
 
 const API_URL = environment.baseUrl;
@@ -111,7 +110,7 @@ export class AuthService {
     localStorage.removeItem('refreshToken');
   }
 
-  register(user: Doctor): Observable<boolean> {
+  register(user: User): Observable<boolean> {
     return this.http.post<AuthResponse>(`${API_URL}/auth/local/signup`, user).pipe(
       tap((response) => {
         this.handleAuthSuccess(response);

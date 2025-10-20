@@ -8,15 +8,15 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
   standalone: true,
   template: `
     <div class="space-y-3" [formGroup]="form">
-      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-2">
+      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-1">
         <app-icon [name]="iconName" [size]="iconSize"></app-icon>
-        {{ label }}
+        {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
       </label>
       <div class="relative">
         <textarea
-          class="w-full px-4 py-3 bg-base-200 border-2 border-base-300 rounded-xl text-base-content placeholder-base-content/50 focus:border-primary focus:bg-base-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20 resize-none"
+          [class]="getTextareaClasses()"
           [formControlName]="fieldName"
-          [placeholder]="placeholder"
+          [placeholder]="hasValue() ? '' : placeholder"
           [rows]="rows"
         ></textarea>
         <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
@@ -35,4 +35,21 @@ export class FormTextareaComponent {
   @Input() iconName!: string;
   @Input() iconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
+  @Input() isRequired: boolean = false;
+
+  hasValue(): boolean {
+    const control = this.form.get(this.fieldName);
+    return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getTextareaClasses(): string {
+    const baseClasses =
+      'w-full px-4 py-3 border-2 rounded-xl focus:border-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20 resize-none';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/60 border-base-300 focus:bg-base-100 text-base-content`;
+    } else {
+      return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30 placeholder-base-content/25 italic`;
+    }
+  }
 }

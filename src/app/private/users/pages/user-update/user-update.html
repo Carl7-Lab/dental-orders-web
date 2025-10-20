@@ -1,0 +1,35 @@
+@if (userResource.isLoading()) {
+<div class="flex justify-center items-center min-h-screen">
+  <span class="loading loading-spinner loading-lg text-primary"></span>
+</div>
+} @if (userResource.error()) {
+<div class="min-h-screen bg-base-100 p-6 flex items-center justify-center">
+  <div class="alert alert-error shadow-lg max-w-md">
+    <div>
+      <h3 class="font-bold">Error al cargar el usuario</h3>
+      <div class="text-sm">No se pudo cargar la información del usuario</div>
+    </div>
+  </div>
+</div>
+} @if (userResource.value(); as user) {
+<form-user
+  [form]="form"
+  pageTitle="Editar Usuario"
+  pageSubtitle="Actualiza la información del usuario"
+  submitButtonText="Guardar Cambios"
+  [cancelRoute]="usersListPath"
+  [showPasswordField]="false"
+  [isEmailEditable]="false"
+  (formSubmit)="onSubmit()"
+/>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar actualización de usuario"
+  message="¿Estás seguro de que deseas guardar los cambios realizados a este usuario?"
+  confirmText="Sí, guardar cambios"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmUpdate()"
+  (cancelled)="onCancelUpdate()"
+/>
+}

@@ -13,9 +13,9 @@ export interface SelectOption {
   standalone: true,
   template: `
     <div class="space-y-3" [formGroup]="form">
-      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-2">
+      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-1">
         <app-icon [name]="iconName" [size]="iconSize"></app-icon>
-        {{ label }}
+        {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
       </label>
       <div class="relative">
         <select
@@ -47,4 +47,5 @@ export class FormSelectComponent {
   @Input() iconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() chevronSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
+  @Input() isRequired: boolean = false;
 }
