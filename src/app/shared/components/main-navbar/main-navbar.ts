@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FULL_NAVIGATION_PATHS } from '../../constants/navigation-path';
-import { AuthService, AuthStatus } from '../../../auth/services/auth.service';
 import { IconComponent } from '../icon/icon.component';
+import { AuthService, AuthStatus } from '../../../public/auth/services/auth.service';
 
 @Component({
   selector: 'main-navbar',

@@ -6,6 +6,6 @@
     "outDir": "./out-tsc/app",
     "types": []
   },
-  "include": ["src/**/*.ts", "src/app/shared/dental-order.routes.ts"],
+  "include": ["src/**/*.ts", "src/app/private/private.routes.ts"],
   "exclude": ["src/**/*.spec.ts"]
 }
