@@ -30,7 +30,9 @@ export class PatientsService {
     const url = this.urlHelper.buildUrl(`${API_URL}/patients`, params);
 
     return this.http.get<PatientsListResponse>(url).pipe(
-      tap((patients) => this.patientsCache.set(key, patients)),
+      tap((patients) => {
+        this.patientsCache.set(key, patients);
+      }),
       catchError((error: any) => {
         console.error('Error al obtener los pacientes:', error);
         return of({

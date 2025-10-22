@@ -1,0 +1,18 @@
+<form-patient
+  [form]="form"
+  pageTitle="Nuevo Paciente"
+  pageSubtitle="Agrega un nuevo paciente a tu cartera"
+  submitButtonText="Crear Paciente"
+  [cancelRoute]="patientsListPath"
+  (formSubmit)="onSubmit()"
+/>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar creación de paciente"
+  message="¿Estás seguro de que deseas crear este nuevo paciente?"
+  confirmText="Sí, crear paciente"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmCreate()"
+  (cancelled)="onCancelCreate()"
+/>

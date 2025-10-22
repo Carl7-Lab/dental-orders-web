@@ -1,0 +1,33 @@
+@if (patientResource.isLoading()) {
+<div class="flex justify-center items-center min-h-screen">
+  <span class="loading loading-spinner loading-lg text-primary"></span>
+</div>
+} @if (patientResource.error()) {
+<div class="min-h-screen bg-base-100 p-6 flex items-center justify-center">
+  <div class="alert alert-error shadow-lg max-w-md">
+    <div>
+      <h3 class="font-bold">Error al cargar el paciente</h3>
+      <div class="text-sm">No se pudo cargar la información del paciente</div>
+    </div>
+  </div>
+</div>
+} @if (patientResource.value(); as patient) {
+<form-patient
+  [form]="form"
+  pageTitle="Editar Paciente"
+  pageSubtitle="Actualiza la información del paciente"
+  submitButtonText="Guardar Cambios"
+  [cancelRoute]="patientsListPath"
+  (formSubmit)="onSubmit()"
+/>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar actualización de paciente"
+  message="¿Estás seguro de que deseas guardar los cambios realizados a este paciente?"
+  confirmText="Sí, guardar cambios"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmUpdate()"
+  (cancelled)="onCancelUpdate()"
+/>
+}

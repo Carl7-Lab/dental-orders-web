@@ -1,0 +1,198 @@
+<div class="min-h-screen p-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <page-header title="Pacientes" subtitle="Gestiona tu base de pacientes" iconName="USERS" />
+
+    <!-- Nuevo Paciente -->
+    <div class="flex justify-end mb-4">
+      <button
+        class="btn btn-primary btn-lg px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-content font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+        [routerLink]="[fullNavigationPaths.PATIENTS_CREATE]"
+      >
+        <app-icon name="PLUS" size="md"></app-icon>
+        <span>Agregar Paciente</span>
+      </button>
+    </div>
+
+    <!-- Loading state -->
+    @if (patientsResource.isLoading()) {
+    <app-loading-state message="Cargando pacientes..." />
+    }
+
+    <!-- Error state -->
+    @if (patientsResource.error()) {
+    <app-error-state
+      title="Error al cargar los pacientes"
+      message="Por favor, intenta nuevamente más tarde"
+    />
+    }
+
+    <!-- Lista de pacientes -->
+    @if (patientsResource.value(); as response) { @if (response.data.length === 0) {
+    <!-- Empty state -->
+    <app-empty-state
+      iconName="USERS"
+      title="No hay pacientes"
+      [message]="'Comienza agregando tu primer paciente'"
+      [showActionButton]="false"
+      actionButtonText="Agregar primer paciente"
+      actionIconName="PLUS"
+      (onActionClick)="navigateToPatientsCreate()"
+    />
+    } @else { @if (response.pagination.totalPages > 1) {
+    <app-pagination
+      [currentPage]="response.pagination.page"
+      [totalPages]="response.pagination.totalPages"
+      [total]="response.pagination.total"
+      [limit]="response.pagination.limit"
+    />
+    }
+    <!-- Tabla de pacientes -->
+    <div class="card bg-base-100 shadow-sm border border-base-300">
+      <!-- Desktop Table -->
+      <div class="hidden lg:block overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              @for (head of tableHeads(); track head) {
+              <th class="text-base-content/70">
+                {{ head }}
+              </th>
+              }
+              <th class="text-base-content/70">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (patient of response.data; track patient.id; let i = $index) {
+            <tr>
+              <td>
+                <div class="font-medium text-base-content">{{ patient.name }}</div>
+              </td>
+              <td class="text-base-content">
+                <a href="mailto:{{ patient.email }}" class="link link-primary">
+                  {{ patient.email }}
+                </a>
+              </td>
+              <td class="text-base-content">
+                @if (patient.phone) {
+                <a href="tel:{{ patient.phone }}" class="link">
+                  {{ patient.phone }}
+                </a>
+                } @else {
+                <span class="text-base-content/50">-</span>
+                }
+              </td>
+              <td class="text-base-content max-w-xs">
+                @if (patient.address) {
+                <span class="truncate block">{{ patient.address }}</span>
+                } @else {
+                <span class="text-base-content/50">-</span>
+                }
+              </td>
+              <td class="text-right">
+                <button
+                  [routerLink]="[patientUpdatePath, patient.id]"
+                  class="btn btn-ghost btn-sm"
+                  title="Editar paciente"
+                >
+                  <app-icon name="edit" size="sm" />
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile/Tablet Cards -->
+      <div class="lg:hidden">
+        @for (patient of response.data; track patient.id; let i = $index) {
+        <div
+          class="border-b border-base-300 p-3 sm:p-4 hover:bg-base-200 transition-colors duration-150"
+        >
+          <!-- Mobile S (320px) Layout -->
+          <div class="block sm:hidden">
+            <div class="flex items-start">
+              <!-- Patient Info -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-medium text-base-content truncate">
+                      {{ patient.name }}
+                    </h3>
+                    <p class="text-xs truncate">
+                      <a href="mailto:{{ patient.email }}" class="link link-primary">
+                        {{ patient.email }}
+                      </a>
+                    </p>
+                    @if (patient.phone) {
+                    <p class="text-xs mt-0.5">
+                      <a href="tel:{{ patient.phone }}" class="link">
+                        {{ patient.phone }}
+                      </a>
+                    </p>
+                    } @if (patient.address) {
+                    <p class="text-xs text-base-content/70 mt-0.5 line-clamp-1">
+                      {{ patient.address }}
+                    </p>
+                    }
+                  </div>
+
+                  <!-- Edit Button -->
+                  <button
+                    [routerLink]="[patientUpdatePath, patient.id]"
+                    class="btn btn-ghost btn-xs flex-shrink-0 ml-2"
+                    title="Editar paciente"
+                  >
+                    <app-icon name="edit" size="xs" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile L and Tablet Layout (425px+) -->
+          <div class="hidden sm:block">
+            <div class="flex items-start justify-between">
+              <div class="flex-1 min-w-0">
+                <!-- Patient Info -->
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-sm font-medium text-base-content truncate">{{ patient.name }}</h3>
+                  <p class="text-sm truncate mt-1">
+                    <a href="mailto:{{ patient.email }}" class="link link-primary">
+                      {{ patient.email }}
+                    </a>
+                  </p>
+                  @if (patient.phone) {
+                  <p class="text-sm mt-1">
+                    <a href="tel:{{ patient.phone }}" class="link">
+                      {{ patient.phone }}
+                    </a>
+                  </p>
+                  } @if (patient.address) {
+                  <p class="text-sm text-base-content/70 mt-1 line-clamp-2">
+                    {{ patient.address }}
+                  </p>
+                  }
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex items-center ml-4">
+                <button
+                  [routerLink]="[patientUpdatePath, patient.id]"
+                  class="btn btn-ghost btn-sm"
+                  title="Editar paciente"
+                >
+                  <app-icon name="edit" size="sm" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    } }
+  </div>
+</div>
