@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FULL_NAVIGATION_PATHS } from '../../constants/navigation-path';
 import { IconComponent } from '../icon/icon.component';
 import { AuthService, AuthStatus } from '../../../public/auth/services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'main-navbar',
@@ -13,6 +14,7 @@ import { AuthService, AuthStatus } from '../../../public/auth/services/auth.serv
 export default class MainNavbar {
   authService = inject(AuthService);
   router = inject(Router);
+  toastService = inject(ToastService);
   authStatus = AuthStatus;
 
   dashboardPath = FULL_NAVIGATION_PATHS.DASHBOARD;
@@ -31,5 +33,9 @@ export default class MainNavbar {
   logout() {
     this.authService.logout();
     this.router.navigateByUrl(FULL_NAVIGATION_PATHS.AUTH_SIGN_IN);
+  }
+
+  changePassword() {
+    this.router.navigateByUrl(FULL_NAVIGATION_PATHS.USERS_CHANGE_PASSWORD);
   }
 }

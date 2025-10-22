@@ -83,4 +83,13 @@ export class UsersService {
       })
     );
   }
+
+  updateUserPassword(id: number, password: string): Observable<User> {
+    return this.http.patch<User>(`${API_URL}/users/${id}`, { password }).pipe(
+      tap((response) => {
+        this.userCache.set(`user-${response.id}`, response);
+        this.usersCache.clear();
+      })
+    );
+  }
 }

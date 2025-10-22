@@ -1,0 +1,53 @@
+<div class="py-8 px-4">
+  <div class="container mx-auto max-w-4xl">
+    <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="LOCK" />
+
+    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+      <form-header title="Cambiar contraseña" iconName="LOCK" />
+
+      <div class="p-8">
+        <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <form-text
+              [form]="form()"
+              fieldName="new-password"
+              label="Contraseña"
+              placeholder="Ingrese la contraseña"
+              inputType="password"
+              iconName="LOCK"
+              [isRequired]="true"
+              [formUtils]="formUtils"
+              autocomplete="new-password"
+            />
+
+            <form-text
+              [form]="form()"
+              fieldName="confirmPassword"
+              label="Confirmar contraseña"
+              placeholder="Ingrese la contraseña"
+              inputType="password"
+              iconName="LOCK"
+              [isRequired]="true"
+              [formUtils]="formUtils"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <form-actions
+            [cancelRoute]="cancelRoute()"
+            cancelText="Cancelar"
+            [submitText]="submitButtonText()"
+            submitIcon="CHECK"
+            [isSubmitDisabled]="isSubmitBlocked() || form().invalid"
+          />
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <p class="text-base-content/60 text-sm">
+        Complete todos los campos requeridos para cambiar la contraseña
+      </p>
+    </div>
+  </div>
+</div>

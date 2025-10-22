@@ -5,7 +5,7 @@
   submitButtonText="Crear Usuario"
   [cancelRoute]="usersListPath"
   (formSubmit)="onSubmit()"
-></form-user>
+/>
 
 <confirmation-modal
   [isOpen]="showConfirmationModal()"
@@ -15,4 +15,4 @@
   cancelText="Cancelar"
   (confirmed)="onConfirmCreate()"
   (cancelled)="(onCancelCreate)"
-></confirmation-modal>
+/>

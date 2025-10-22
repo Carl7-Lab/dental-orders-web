@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FULL_NAVIGATION_PATHS } from '../../../shared/constants/navigation-path';
-import { User } from '../interfaces/user.interface';
+import { FULL_NAVIGATION_PATHS } from '../../../../shared/constants/navigation-path';
+import { User } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -18,7 +18,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
           [class]="getInputClasses()"
           [formControlName]="fieldName"
           [placeholder]="hasValue() ? '' : placeholder"
-          [disabled]="isDisabled"
+          [autocomplete]="autocomplete"
         />
         <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
         </app-error-message>
@@ -38,6 +38,7 @@ export class FormTextComponent {
   @Input() formUtils: any;
   @Input() isRequired: boolean = false;
   @Input() isDisabled: boolean = false;
+  @Input() autocomplete: string = 'off';
 
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);

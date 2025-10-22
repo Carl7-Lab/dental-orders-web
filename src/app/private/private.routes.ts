@@ -4,6 +4,7 @@ import DashboardPage from './dashboard/page/dashboard-page';
 import UsersPage from './users/pages/users-list/users-page';
 import { CreateUser } from './users/pages/user-create/user-create';
 import { UpdateUser } from './users/pages/user-update/user-update';
+import { ChangePasswordPage } from './users/pages/change-password/change-password';
 
 export const publicRoutes: Routes = [
   {
@@ -20,6 +21,10 @@ export const publicRoutes: Routes = [
       {
         path: NAVIGATION_PATHS.USERS_UPDATE,
         component: UpdateUser,
+      },
+      {
+        path: NAVIGATION_PATHS.USERS_CHANGE_PASSWORD,
+        component: ChangePasswordPage,
       },
     ],
   },

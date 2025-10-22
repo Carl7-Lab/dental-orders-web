@@ -8,7 +8,7 @@ import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { ConfirmationModalComponent } from '../../../../shared/components/confirmation-modal/confirmation-modal.component';
 import { CommonModule } from '@angular/common';
-import { FormUserService } from '../../services/form-user.service';
+import { FormUserService } from '../../components/form-users/form-user.service';
 import { User } from '../../interfaces/user.interface';
 
 @Component({

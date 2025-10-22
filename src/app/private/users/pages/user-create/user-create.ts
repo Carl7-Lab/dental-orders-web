@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FULL_NAVIGATION_PATHS } from '../../../../shared/constants/navigation-path';
 import FormUserComponent from '../../components/form-users/form-user';
-import { FormUserService } from '../../services/form-user.service';
+import { FormUserService } from '../../components/form-users/form-user.service';
 import { ConfirmationModalComponent } from '../../../../shared/components/confirmation-modal/confirmation-modal.component';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../services/users.service';
