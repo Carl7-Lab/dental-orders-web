@@ -1,0 +1,37 @@
+@if (clinicResource.isLoading()) {
+<div class="min-h-screen flex items-center justify-center">
+  <div class="text-center">
+    <div class="loading loading-spinner loading-lg"></div>
+    <p class="mt-4 text-lg">Cargando información de la clínica...</p>
+  </div>
+</div>
+} @if (clinicResource.error()) {
+<div class="min-h-screen flex items-center justify-center">
+  <div class="text-center">
+    <div class="text-error text-6xl mb-4">⚠️</div>
+    <h2 class="text-2xl font-bold mb-2">Error al cargar la clínica</h2>
+    <p class="text-base-content/70 mb-4">No se pudo cargar la información de la clínica</p>
+    <button class="btn btn-primary" [routerLink]="[clinicsListPath]">Volver a la lista</button>
+  </div>
+</div>
+} @if (clinicResource.value()) {
+<form-clinic
+  [form]="form"
+  pageTitle="Editar Clínica"
+  pageSubtitle="Modifica la información de la clínica"
+  submitButtonText="Actualizar Clínica"
+  [cancelRoute]="clinicsListPath"
+  [isSubmitBlocked]="false"
+  (formSubmit)="onSubmit()"
+/>
+}
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar Actualización"
+  message="¿Estás seguro de que deseas actualizar esta clínica?"
+  confirmText="Actualizar"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmUpdate()"
+  (cancelled)="showConfirmationModal.set(false)"
+/>

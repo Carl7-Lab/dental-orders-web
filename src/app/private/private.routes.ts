@@ -8,6 +8,9 @@ import { ChangePasswordPage } from './users/pages/change-password/change-passwor
 import PatientsPage from './patients/pages/patients-list/patients-page';
 import { CreatePatient } from './patients/pages/patient-create/patient-create';
 import { UpdatePatient } from './patients/pages/patient-update/patient-update';
+import ClinicsPage from './clinics/pages/clinics-list/clinics-page';
+import { CreateClinic } from './clinics/pages/clinic-create/clinic-create';
+import { UpdateClinic } from './clinics/pages/clinic-update/clinic-update';
 
 export const publicRoutes: Routes = [
   {
@@ -45,6 +48,23 @@ export const publicRoutes: Routes = [
       {
         path: NAVIGATION_PATHS.PATIENTS_UPDATE,
         component: UpdatePatient,
+      },
+    ],
+  },
+  {
+    path: NAVIGATION_PATHS.CLINICS,
+    children: [
+      {
+        path: '',
+        component: ClinicsPage,
+      },
+      {
+        path: NAVIGATION_PATHS.CLINICS_CREATE,
+        component: CreateClinic,
+      },
+      {
+        path: NAVIGATION_PATHS.CLINICS_UPDATE,
+        component: UpdateClinic,
       },
     ],
   },

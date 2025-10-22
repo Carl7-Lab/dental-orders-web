@@ -1,0 +1,19 @@
+<form-clinic
+  [form]="form"
+  pageTitle="Crear Clínica"
+  pageSubtitle="Agrega una nueva clínica al sistema"
+  submitButtonText="Crear Clínica"
+  [cancelRoute]="clinicsListPath"
+  [isSubmitBlocked]="false"
+  (formSubmit)="onSubmit()"
+/>
+
+<confirmation-modal
+  [isOpen]="showConfirmationModal()"
+  title="Confirmar Creación"
+  message="¿Estás seguro de que deseas crear esta clínica?"
+  confirmText="Crear"
+  cancelText="Cancelar"
+  (confirmed)="onConfirmCreate()"
+  (cancelled)="showConfirmationModal.set(false)"
+/>

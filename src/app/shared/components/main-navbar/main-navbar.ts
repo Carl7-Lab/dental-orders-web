@@ -21,6 +21,10 @@ export default class MainNavbar {
 
   menuItems = [
     {
+      label: 'Clínicas',
+      path: FULL_NAVIGATION_PATHS.CLINICS_LIST,
+    },
+    {
       label: 'Pacientes',
       path: FULL_NAVIGATION_PATHS.PATIENTS_LIST,
     },

@@ -1,0 +1,69 @@
+<div class="py-8 px-4">
+  <div class="container mx-auto max-w-4xl">
+    <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="BUILDING" />
+
+    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+      <form-header title="Formulario de Clínica" iconName="BUILDING" />
+
+      <div class="p-8">
+        <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Nombre de la clínica -->
+            <form-text
+              [form]="form()"
+              fieldName="name"
+              label="Nombre de la Clínica"
+              placeholder="Ingresa el nombre de la clínica"
+              inputType="text"
+              iconName="BUILDING"
+              [formUtils]="formUtils"
+              [isRequired]="true"
+            />
+
+            <!-- Teléfono -->
+            <form-text
+              [form]="form()"
+              fieldName="phone"
+              label="Teléfono"
+              placeholder="Ingresa el número de teléfono"
+              inputType="tel"
+              iconName="PHONE"
+              [formUtils]="formUtils"
+              [isRequired]="false"
+            />
+
+            <!-- Email -->
+            <form-text
+              [form]="form()"
+              fieldName="email"
+              label="Email"
+              placeholder="Ingresa el email de contacto"
+              inputType="email"
+              iconName="MAIL"
+              [formUtils]="formUtils"
+              [isRequired]="false"
+            />
+
+            <!-- Dirección -->
+            <form-textarea
+              [form]="form()"
+              fieldName="address"
+              label="Dirección"
+              placeholder="Ingresa la dirección de la clínica"
+              iconName="MAP_PIN"
+              [formUtils]="formUtils"
+              [isRequired]="false"
+            />
+          </div>
+
+          <form-actions
+            [cancelRoute]="cancelRoute()"
+            [submitText]="submitButtonText()"
+            [isLoading]="isSubmitBlocked()"
+            (onSubmit)="onSubmit()"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
