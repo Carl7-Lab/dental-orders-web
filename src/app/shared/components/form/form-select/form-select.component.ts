@@ -19,7 +19,7 @@ export interface SelectOption {
       </label>
       <div class="relative">
         <select
-          class="w-full px-4 py-3 bg-base-200 border-2 border-base-300 rounded-xl text-base-content placeholder-base-content/50 focus:border-primary focus:bg-base-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20 appearance-none cursor-pointer"
+          class="select select-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
           [formControlName]="fieldName"
         >
           <option disabled selected value="">{{ placeholder }}</option>
@@ -27,9 +27,6 @@ export interface SelectOption {
           <option value="{{ option.value }}">{{ option.label }}</option>
           }
         </select>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-          <app-icon name="CHEVRON_DOWN" [size]="chevronSize"></app-icon>
-        </div>
         <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
         </app-error-message>
       </div>
@@ -45,7 +42,6 @@ export class FormSelectComponent {
   @Input() options: SelectOption[] = [];
   @Input() iconName!: string;
   @Input() iconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
-  @Input() chevronSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
   @Input() isRequired: boolean = false;
 }

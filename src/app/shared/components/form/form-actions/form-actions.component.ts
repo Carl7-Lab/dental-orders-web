@@ -9,7 +9,7 @@ import { IconComponent } from '../../icon/icon.component';
     <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t border-base-300">
       <button
         type="button"
-        class="btn btn-outline btn-lg px-8 py-3 rounded-xl border-2 hover:border-error hover:bg-error hover:text-error-content transition-all duration-300 flex items-center justify-center gap-2"
+        class="btn btn-outline btn-lg hover:btn-error transition-all duration-300 flex items-center justify-center gap-2"
         [routerLink]="cancelRoute"
         [disabled]="isCancelDisabled"
       >
@@ -20,7 +20,7 @@ import { IconComponent } from '../../icon/icon.component';
 
       <button
         type="submit"
-        class="btn btn-primary btn-lg px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-content font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+        class="btn btn-primary btn-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         [disabled]="isSubmitDisabled"
         (click)="onSubmit.emit()"
       >

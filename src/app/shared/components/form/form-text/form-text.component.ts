@@ -15,7 +15,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
       <div class="relative">
         <input
           [type]="inputType"
-          [class]="getInputClasses()"
+          class="input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
           [formControlName]="fieldName"
           [placeholder]="hasValue() ? '' : placeholder"
           [autocomplete]="autocomplete"
@@ -37,24 +37,10 @@ export class FormTextComponent {
   @Input() iconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
   @Input() isRequired: boolean = false;
-  @Input() isDisabled: boolean = false;
   @Input() autocomplete: string = 'off';
 
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);
     return control ? control.value && control.value.toString().trim() !== '' : false;
-  }
-
-  getInputClasses(): string {
-    const baseClasses =
-      'w-full px-4 py-3 border-2 rounded-xl focus:border-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20';
-
-    if (this.isDisabled) {
-      return `${baseClasses} bg-base-300/40 border-base-300/50 text-base-content/60 cursor-not-allowed opacity-60`;
-    } else if (this.hasValue()) {
-      return `${baseClasses} bg-base-300/60 border-base-300 focus:bg-base-100 text-base-content`;
-    } else {
-      return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30 placeholder-base-content/25 italic`;
-    }
   }
 }

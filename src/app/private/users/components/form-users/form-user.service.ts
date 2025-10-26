@@ -36,7 +36,6 @@ export class FormUserService {
 
   patchFormWithUser(form: FormGroup, user: User): void {
     if (user) {
-      console.log('patching form with user =>', user);
       form.patchValue({
         name: user.name,
         email: user.email,

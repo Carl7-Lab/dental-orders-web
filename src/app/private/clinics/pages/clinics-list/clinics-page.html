@@ -1,110 +1,104 @@
-<div class="min-h-screen p-6">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <page-header
-      title="Clínicas"
-      subtitle="Gestiona las clínicas del sistema"
-      iconName="BUILDING"
-    />
+<div class="max-w-7xl mx-auto">
+  <!-- Header -->
+  <page-header title="Clínicas" subtitle="Gestiona las clínicas del sistema" iconName="BUILDING" />
 
-    <!-- Botón de crear -->
-    <div class="flex justify-end mb-4">
-      <button class="btn btn-primary btn-lg" (click)="navigateToClinicCreate()">
-        <app-icon name="PLUS" size="md"></app-icon>
-        <span>Agregar Clínica</span>
-      </button>
-    </div>
-
-    <!-- Estados de carga, error y vacío -->
-    @if (clinicsResource.isLoading()) {
-    <app-loading-state message="Cargando clínicas..." />
-    } @if (clinicsResource.error()) {
-    <app-error-state
-      title="Error al cargar las clínicas"
-      message="Por favor, intenta nuevamente más tarde"
-    />
-    }
-
-    <!-- Lista de clínicas -->
-    @if (clinicsResource.value(); as response) { @if (response.data.length === 0) {
-    <app-empty-state
-      iconName="BUILDING"
-      title="No hay clínicas"
-      message="Comienza agregando tu primera clínica"
-    />
-    } @else { @if (response.pagination.totalPages > 1) {
-    <app-pagination
-      [currentPage]="response.pagination.page"
-      [totalPages]="response.pagination.totalPages"
-      [total]="response.pagination.total"
-      [limit]="response.pagination.limit"
-    />
-    }
-
-    <!-- Tabla de clínicas -->
-    <div class="card bg-base-100 shadow-sm border border-base-300">
-      <!-- Tabla para desktop -->
-      <div class="hidden lg:block overflow-x-auto">
-        <table class="table table-zebra">
-          <thead>
-            <tr>
-              @for (head of tableHeads(); track head) {
-              <th class="text-base-content/70">{{ head }}</th>
-              }
-              <th class="text-base-content/70">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (clinic of response.data; track clinic.id) {
-            <tr>
-              <td class="font-medium">{{ clinic.name }}</td>
-              <td>{{ clinic.phone || '-' }}</td>
-              <td>{{ clinic.email || '-' }}</td>
-              <td>{{ clinic.address || '-' }}</td>
-              <td class="text-right">
-                <button [routerLink]="[clinicsUpdatePath, clinic.id]" class="btn btn-ghost btn-sm">
-                  <app-icon name="EDIT" size="sm" />
-                </button>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Cards para mobile -->
-      <div class="lg:hidden">
-        @for (clinic of response.data; track clinic.id) {
-        <div class="border-b border-base-300 p-3 sm:p-4">
-          <div class="flex justify-between items-start">
-            <div class="flex-1">
-              <h3 class="font-semibold text-lg">{{ clinic.name }}</h3>
-              @if (clinic.phone) {
-              <p class="text-sm text-base-content/70 mt-1">
-                <app-icon name="PHONE" size="xs" class="inline mr-1" />
-                {{ clinic.phone }}
-              </p>
-              } @if (clinic.email) {
-              <p class="text-sm text-base-content/70 mt-1">
-                <app-icon name="MAIL" size="xs" class="inline mr-1" />
-                {{ clinic.email }}
-              </p>
-              } @if (clinic.address) {
-              <p class="text-sm text-base-content/70 mt-1">
-                <app-icon name="MAP_PIN" size="xs" class="inline mr-1" />
-                {{ clinic.address }}
-              </p>
-              }
-            </div>
-            <button [routerLink]="[clinicsUpdatePath, clinic.id]" class="btn btn-ghost btn-sm">
-              <app-icon name="EDIT" size="sm" />
-            </button>
-          </div>
-        </div>
-        }
-      </div>
-    </div>
-
-    } }
+  <!-- Botón de crear -->
+  <div class="flex justify-end mb-4">
+    <button class="btn btn-primary btn-lg" (click)="navigateToClinicCreate()">
+      <app-icon name="PLUS" size="md"></app-icon>
+      <span>Agregar Clínica</span>
+    </button>
   </div>
+
+  <!-- Estados de carga, error y vacío -->
+  @if (clinicsResource.isLoading()) {
+  <app-loading-state message="Cargando clínicas..." />
+  } @if (clinicsResource.error()) {
+  <app-error-state
+    title="Error al cargar las clínicas"
+    message="Por favor, intenta nuevamente más tarde"
+  />
+  }
+
+  <!-- Lista de clínicas -->
+  @if (clinicsResource.value(); as response) { @if (response.data.length === 0) {
+  <app-empty-state
+    iconName="BUILDING"
+    title="No hay clínicas"
+    message="Comienza agregando tu primera clínica"
+  />
+  } @else { @if (response.pagination.totalPages > 1) {
+  <app-pagination
+    [currentPage]="response.pagination.page"
+    [totalPages]="response.pagination.totalPages"
+    [total]="response.pagination.total"
+    [limit]="response.pagination.limit"
+  />
+  }
+
+  <!-- Tabla de clínicas -->
+  <div class="card bg-base-100 shadow-sm border border-base-300">
+    <!-- Tabla para desktop -->
+    <div class="hidden lg:block overflow-x-auto">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            @for (head of tableHeads(); track head) {
+            <th class="text-base-content/70">{{ head }}</th>
+            }
+            <th class="text-base-content/70">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (clinic of response.data; track clinic.id) {
+          <tr>
+            <td class="font-medium">{{ clinic.name }}</td>
+            <td>{{ clinic.phone || '-' }}</td>
+            <td>{{ clinic.email || '-' }}</td>
+            <td>{{ clinic.address || '-' }}</td>
+            <td class="text-right">
+              <button [routerLink]="[clinicsUpdatePath, clinic.id]" class="btn btn-ghost btn-sm">
+                <app-icon name="EDIT" size="sm" />
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards para mobile -->
+    <div class="lg:hidden">
+      @for (clinic of response.data; track clinic.id) {
+      <div class="border-b border-base-300 p-3 sm:p-4">
+        <div class="flex justify-between items-start">
+          <div class="flex-1">
+            <h3 class="font-semibold text-lg">{{ clinic.name }}</h3>
+            @if (clinic.phone) {
+            <p class="text-sm text-base-content/70 mt-1">
+              <app-icon name="PHONE" size="xs" class="inline mr-1" />
+              {{ clinic.phone }}
+            </p>
+            } @if (clinic.email) {
+            <p class="text-sm text-base-content/70 mt-1">
+              <app-icon name="MAIL" size="xs" class="inline mr-1" />
+              {{ clinic.email }}
+            </p>
+            } @if (clinic.address) {
+            <p class="text-sm text-base-content/70 mt-1">
+              <app-icon name="MAP_PIN" size="xs" class="inline mr-1" />
+              {{ clinic.address }}
+            </p>
+            }
+          </div>
+          <button [routerLink]="[clinicsUpdatePath, clinic.id]" class="btn btn-ghost btn-sm">
+            <app-icon name="EDIT" size="sm" />
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  } }
 </div>

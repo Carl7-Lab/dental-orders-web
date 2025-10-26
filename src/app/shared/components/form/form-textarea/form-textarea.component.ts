@@ -14,7 +14,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
       </label>
       <div class="relative">
         <textarea
-          [class]="getTextareaClasses()"
+          class="textarea textarea-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20 resize-none"
           [formControlName]="fieldName"
           [placeholder]="hasValue() ? '' : placeholder"
           [rows]="rows"
@@ -40,16 +40,5 @@ export class FormTextareaComponent {
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);
     return control ? control.value && control.value.toString().trim() !== '' : false;
-  }
-
-  getTextareaClasses(): string {
-    const baseClasses =
-      'w-full px-4 py-3 border-2 rounded-xl focus:border-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20 resize-none';
-
-    if (this.hasValue()) {
-      return `${baseClasses} bg-base-300/60 border-base-300 focus:bg-base-100 text-base-content`;
-    } else {
-      return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30 placeholder-base-content/25 italic`;
-    }
   }
 }

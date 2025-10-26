@@ -25,7 +25,6 @@ export class FormPatientService {
 
   patchFormWithPatient(form: FormGroup, patient: Patient): void {
     if (patient) {
-      console.log('patching form with patient =>', patient);
       form.patchValue({
         name: patient.name,
         email: patient.email,

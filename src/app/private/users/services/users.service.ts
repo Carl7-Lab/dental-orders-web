@@ -71,7 +71,6 @@ export class UsersService {
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    console.log('updateUser =>', user);
     if (user.phone === '') {
       user = { ...user, phone: undefined };
     }
