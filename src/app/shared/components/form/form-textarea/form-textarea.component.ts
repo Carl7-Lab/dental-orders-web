@@ -14,7 +14,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
           {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
         </legend>
         <textarea
-          class="textarea textarea-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20 resize-none"
+          class="{{ getInputClasses() }}"
           [formControlName]="fieldName"
           [placeholder]="hasValue() ? '' : placeholder"
           [rows]="rows"
@@ -39,5 +39,16 @@ export class FormTextareaComponent {
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);
     return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getInputClasses(): string {
+    const baseClasses =
+      'textarea textarea-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20 resize-none';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/40 border-base-300 focus:bg-base-100`;
+    }
+
+    return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30 placeholder-base-content/25 italic`;
   }
 }

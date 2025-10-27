@@ -15,7 +15,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
         </legend>
         <input
           type="date"
-          class="input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
+          class="{{ getInputClasses() }}"
           [formControlName]="fieldName"
           [placeholder]="placeholder"
         />
@@ -38,5 +38,16 @@ export class FormDateComponent {
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);
     return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getInputClasses(): string {
+    const baseClasses =
+      'input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/40 border-base-300`;
+    }
+
+    return `${baseClasses} bg-base-300/20 border-base-300/70 placeholder-base-content/25`;
   }
 }

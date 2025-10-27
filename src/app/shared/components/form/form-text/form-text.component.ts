@@ -16,7 +16,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
         </legend>
         <input
           [type]="inputType"
-          class="input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
+          class="{{ getInputClasses() }}"
           [formControlName]="fieldName"
           [placeholder]="hasValue() ? '' : placeholder"
           [autocomplete]="autocomplete"
@@ -42,5 +42,16 @@ export class FormTextComponent {
   hasValue(): boolean {
     const control = this.form.get(this.fieldName);
     return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getInputClasses(): string {
+    const baseClasses =
+      'input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/40 border-base-300 focus:bg-base-100`;
+    }
+
+    return `${baseClasses} bg-base-300/20 border-base-300/70 focus:bg-base-100 text-base-content/30 placeholder-base-content/25 italic`;
   }
 }

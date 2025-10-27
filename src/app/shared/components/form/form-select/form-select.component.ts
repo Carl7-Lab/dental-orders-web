@@ -18,13 +18,12 @@ export interface SelectOption {
           <app-icon [name]="iconName" [size]="iconSize" />
           {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
         </legend>
-        <select
-          class="select select-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
-          [formControlName]="fieldName"
-        >
-          <option disabled selected value="">{{ placeholder }}</option>
+        <select class="{{ getInputClasses() }} " [formControlName]="fieldName">
+          <option disabled selected value="" class="italic">{{ placeholder }}</option>
           @for( option of options; track option.value ){
-          <option value="{{ option.value }}">{{ option.label }}</option>
+          <option value="{{ option.value }}" class="text-base-content sans-serif">
+            {{ option.label }}
+          </option>
           }
         </select>
         <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils" />
@@ -43,4 +42,20 @@ export class FormSelectComponent {
   @Input() iconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | string = 'md';
   @Input() formUtils: any;
   @Input() isRequired: boolean = false;
+
+  hasValue(): boolean {
+    const control = this.form.get(this.fieldName);
+    return control ? control.value && control.value.toString().trim() !== '' : false;
+  }
+
+  getInputClasses(): string {
+    const baseClasses =
+      'select select-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20 cursor-pointer focus:bg-base-100 focus-within:bg-base-100';
+
+    if (this.hasValue()) {
+      return `${baseClasses} bg-base-300/40 border-base-300`;
+    }
+
+    return `${baseClasses} bg-base-300/20 border-base-300/70 placeholder-base-content/25`;
+  }
 }
