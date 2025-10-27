@@ -39,7 +39,8 @@ export class CreatePatient {
   onConfirmCreate() {
     this.showConfirmationModal.set(false);
 
-    const patientData = this.form.value;
+    let patientData = this.form.value;
+    patientData = { ...patientData, email: undefined, phone: undefined };
 
     this.patientsService.createPatient(patientData).subscribe({
       next: (patient) => {

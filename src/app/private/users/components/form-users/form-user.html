@@ -1,94 +1,84 @@
-<div class="py-8 px-4">
-  <div class="container mx-auto max-w-4xl">
-    <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="USER" />
+<div class="container mx-auto max-w-4xl">
+  <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="USER" />
 
-    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
-      <form-header title="Formulario de Usuario" iconName="EDIT" />
+  <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+    <form-header title="Formulario de Usuario" iconName="EDIT" />
 
-      <div class="p-8">
-        <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-8">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <form-text
-              [form]="form()"
-              fieldName="name"
-              label="Nombre"
-              placeholder="Ingrese el nombre del usuario"
-              inputType="text"
-              iconName="USER"
-              [formUtils]="formUtils"
-              [isRequired]="true"
-            />
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-6 p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-0">
+        <form-text
+          [form]="form()"
+          fieldName="name"
+          label="Nombre"
+          placeholder="Ingrese el nombre del usuario"
+          inputType="text"
+          iconName="USER"
+          [formUtils]="formUtils"
+          [isRequired]="true"
+        />
 
-            <form-text
-              [form]="form()"
-              fieldName="email"
-              label="Email"
-              placeholder="Ingrese el email del usuario"
-              inputType="email"
-              iconName="EMAIL"
-              [formUtils]="formUtils"
-              [isRequired]="isEmailEditable()"
-            />
+        <form-text
+          [form]="form()"
+          fieldName="email"
+          label="Email"
+          placeholder="Ingrese el email del usuario"
+          inputType="email"
+          iconName="EMAIL"
+          [formUtils]="formUtils"
+          [isRequired]="isEmailEditable()"
+        />
 
-            @if (showPasswordField()) {
-            <form-text
-              [form]="form()"
-              fieldName="password"
-              label="Contraseña"
-              placeholder="Ingrese la contraseña del usuario"
-              inputType="password"
-              iconName="LOCK"
-              [formUtils]="formUtils"
-              [isRequired]="true"
-            />
-            }
+        @if (showPasswordField()) {
+        <form-text
+          [form]="form()"
+          fieldName="password"
+          label="Contraseña"
+          placeholder="Ingrese la contraseña del usuario"
+          inputType="password"
+          iconName="LOCK"
+          [formUtils]="formUtils"
+          [isRequired]="true"
+        />
+        }
 
-            <form-text
-              [form]="form()"
-              fieldName="phone"
-              label="Teléfono"
-              placeholder="Ingrese el teléfono del usuario"
-              inputType="tel"
-              iconName="PHONE"
-              [formUtils]="formUtils"
-            />
+        <form-text
+          [form]="form()"
+          fieldName="phone"
+          label="Teléfono"
+          placeholder="Ingrese el teléfono del usuario"
+          inputType="tel"
+          iconName="PHONE"
+          [formUtils]="formUtils"
+        />
 
-            <form-text
-              [form]="form()"
-              fieldName="address"
-              label="Dirección"
-              placeholder="Ingrese la dirección del usuario"
-              inputType="text"
-              iconName="LOCATION"
-              [formUtils]="formUtils"
-            />
+        <form-text
+          [form]="form()"
+          fieldName="address"
+          label="Dirección"
+          placeholder="Ingrese la dirección del usuario"
+          inputType="text"
+          iconName="LOCATION"
+          [formUtils]="formUtils"
+        />
 
-            <form-select
-              [form]="form()"
-              fieldName="role"
-              label="Rol"
-              placeholder="Seleccione el rol del usuario"
-              [options]="rolesOptions"
-              iconName="USER"
-              [formUtils]="formUtils"
-              [isRequired]="true"
-            />
-          </div>
-
-          <form-actions
-            [cancelRoute]="cancelRoute()"
-            [submitText]="submitButtonText()"
-            [isLoading]="isSubmitBlocked()"
-            (onSubmit)="onSubmit()"
-          />
-        </form>
+        <form-select
+          [form]="form()"
+          fieldName="role"
+          label="Rol"
+          placeholder="Seleccione el rol del usuario"
+          [options]="rolesOptions"
+          iconName="USER"
+          [formUtils]="formUtils"
+          [isRequired]="true"
+        />
       </div>
-    </div>
 
-    <div class="text-center mt-8">
-      <p class="text-base-content/60 text-sm">
-        Complete todos los campos requeridos para crear el doctor
-      </p>
-    </div>
+      <form-actions
+        [cancelRoute]="cancelRoute()"
+        [submitText]="submitButtonText()"
+        [isLoading]="isSubmitBlocked()"
+        (onSubmit)="onSubmit()"
+      />
+    </form>
   </div>
 </div>

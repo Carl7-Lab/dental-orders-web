@@ -8,11 +8,12 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
   standalone: true,
   template: `
     <div class="space-y-3" [formGroup]="form">
-      <label class="text-sm font-semibold text-base-content mb-3 flex items-center gap-1">
-        <app-icon [name]="iconName" [size]="iconSize"></app-icon>
-        {{ label }} <span class="text-error">{{ isRequired ? '*' : '' }}</span>
-      </label>
-      <div class="relative">
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          <app-icon [name]="iconName" [size]="iconSize" />
+          {{ label }}
+          <span class="text-error">{{ isRequired ? '*' : '' }}</span>
+        </legend>
         <input
           [type]="inputType"
           class="input input-bordered w-full focus:border-primary focus:ring-4 focus:ring-primary/20"
@@ -20,9 +21,8 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
           [placeholder]="hasValue() ? '' : placeholder"
           [autocomplete]="autocomplete"
         />
-        <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils">
-        </app-error-message>
-      </div>
+        <app-error-message [form]="form" [fieldName]="fieldName" [formUtils]="formUtils" />
+      </fieldset>
     </div>
   `,
   imports: [ReactiveFormsModule, IconComponent, ErrorMessageComponent],

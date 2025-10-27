@@ -5,7 +5,7 @@ import { IconComponent } from '../../icon/icon.component';
   selector: 'form-header',
   standalone: true,
   template: `
-    <div class="bg-gradient-to-r from-primary/5 to-secondary/5 px-8 py-6 border-b border-base-300">
+    <div class="bg-gradient-to-r from-primary/5 to-secondary/5 px-6 py-4 border-b border-base-300">
       <h2 class="text-2xl font-semibold text-base-content flex items-center gap-3">
         <app-icon [name]="iconName" [size]="iconSize"></app-icon>
         {{ title }}

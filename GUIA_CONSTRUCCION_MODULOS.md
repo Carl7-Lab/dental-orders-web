@@ -317,125 +317,119 @@ export class UpdateEntityName {
 ### Lista de Entidades
 
 ```html
-<div class="min-h-screen p-6">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <page-header title="Entidades" subtitle="Gestiona tus entidades" iconName="ICON_NAME" />
+<div class="max-w-7xl mx-auto">
+  <!-- Header -->
+  <page-header title="Entidades" subtitle="Gestiona tus entidades" iconName="ICON_NAME" />
 
-    <!-- Botón de crear -->
-    <div class="flex justify-end mb-4">
-      <button class="btn btn-primary btn-lg" [routerLink]="[fullNavigationPaths.ENTITIES_CREATE]">
-        <app-icon name="PLUS" size="md"></app-icon>
-        <span>Agregar Entidad</span>
-      </button>
-    </div>
-
-    <!-- Estados de carga, error y vacío -->
-    @if (entitiesResource.isLoading()) {
-    <app-loading-state message="Cargando entidades..." />
-    } @if (entitiesResource.error()) {
-    <app-error-state
-      title="Error al cargar las entidades"
-      message="Por favor, intenta nuevamente más tarde"
-    />
-    }
-
-    <!-- Lista de entidades -->
-    @if (entitiesResource.value(); as response) { @if (response.data.length === 0) {
-    <app-empty-state
-      iconName="ICON_NAME"
-      title="No hay entidades"
-      message="Comienza agregando tu primera entidad"
-    />
-    } @else { @if (response.pagination.totalPages > 1) {
-    <app-pagination
-      [currentPage]="response.pagination.page"
-      [totalPages]="response.pagination.totalPages"
-      [total]="response.pagination.total"
-      [limit]="response.pagination.limit"
-    />
-    }
-
-    <!-- Tabla de entidades -->
-    <div class="card bg-base-100 shadow-sm border border-base-300">
-      <!-- Tabla para desktop -->
-      <div class="hidden lg:block overflow-x-auto">
-        <table class="table table-zebra">
-          <thead>
-            <tr>
-              @for (head of tableHeads(); track head) {
-              <th class="text-base-content/70">{{ head }}</th>
-              }
-              <th class="text-base-content/70">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (entity of response.data; track entity.id) {
-            <tr>
-              <!-- Campos de la entidad -->
-              <td class="text-right">
-                <button [routerLink]="[entityUpdatePath, entity.id]" class="btn btn-ghost btn-sm">
-                  <app-icon name="edit" size="sm" />
-                </button>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Cards para mobile -->
-      <div class="lg:hidden">
-        @for (entity of response.data; track entity.id) {
-        <div class="border-b border-base-300 p-3 sm:p-4">
-          <!-- Información de la entidad -->
-          <button [routerLink]="[entityUpdatePath, entity.id]" class="btn btn-ghost btn-sm">
-            <app-icon name="edit" size="sm" />
-          </button>
-        </div>
-        }
-      </div>
-    </div>
-    } }
+  <!-- Botón de crear -->
+  <div class="flex justify-end mb-4">
+    <button class="btn btn-primary btn-lg" [routerLink]="[fullNavigationPaths.ENTITIES_CREATE]">
+      <app-icon name="PLUS" size="md"></app-icon>
+      <span>Agregar Entidad</span>
+    </button>
   </div>
+
+  <!-- Estados de carga, error y vacío -->
+  @if (entitiesResource.isLoading()) {
+  <app-loading-state message="Cargando entidades..." />
+  } @if (entitiesResource.error()) {
+  <app-error-state
+    title="Error al cargar las entidades"
+    message="Por favor, intenta nuevamente más tarde"
+  />
+  }
+
+  <!-- Lista de entidades -->
+  @if (entitiesResource.value(); as response) { @if (response.data.length === 0) {
+  <app-empty-state
+    iconName="ICON_NAME"
+    title="No hay entidades"
+    message="Comienza agregando tu primera entidad"
+  />
+  } @else { @if (response.pagination.totalPages > 1) {
+  <app-pagination
+    [currentPage]="response.pagination.page"
+    [totalPages]="response.pagination.totalPages"
+    [total]="response.pagination.total"
+    [limit]="response.pagination.limit"
+  />
+  }
+
+  <!-- Tabla de entidades -->
+  <div class="card bg-base-100 shadow-sm border border-base-300">
+    <!-- Tabla para desktop -->
+    <div class="hidden lg:block overflow-x-auto">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            @for (head of tableHeads(); track head) {
+            <th class="text-base-content/70">{{ head }}</th>
+            }
+            <th class="text-base-content/70">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entity of response.data; track entity.id) {
+          <tr>
+            <!-- Campos de la entidad -->
+            <td class="text-right">
+              <button [routerLink]="[entityUpdatePath, entity.id]" class="btn btn-ghost btn-sm">
+                <app-icon name="edit" size="sm" />
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards para mobile -->
+    <div class="lg:hidden">
+      @for (entity of response.data; track entity.id) {
+      <div class="border-b border-base-300 p-3 sm:p-4">
+        <!-- Información de la entidad -->
+        <button [routerLink]="[entityUpdatePath, entity.id]" class="btn btn-ghost btn-sm">
+          <app-icon name="edit" size="sm" />
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+  } }
 </div>
 ```
 
 ### Formulario de Entidad
 
 ```html
-<div class="py-8 px-4">
-  <div class="container mx-auto max-w-4xl">
-    <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="ICON_NAME" />
+<div class="container mx-auto max-w-4xl">
+  <page-header [title]="pageTitle()" [subtitle]="pageSubtitle()" iconName="ICON_NAME" />
 
-    <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
-      <form-header title="Formulario de Entidad" iconName="EDIT" />
+  <div class="bg-base-100 rounded-3xl shadow-2xl border border-base-300 overflow-hidden">
+    <form-header title="Formulario de Entidad" iconName="EDIT" />
 
-      <div class="p-8">
-        <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-8">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Campos del formulario -->
-            <form-text
-              [form]="form()"
-              fieldName="fieldName"
-              label="Label del Campo"
-              placeholder="Placeholder del campo"
-              inputType="text"
-              iconName="ICON_NAME"
-              [formUtils]="formUtils"
-              [isRequired]="true"
-            />
-          </div>
-
-          <form-actions
-            [cancelRoute]="cancelRoute()"
-            [submitText]="submitButtonText()"
-            [isLoading]="isSubmitBlocked()"
-            (onSubmit)="onSubmit()"
-          />
-        </form>
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="space-y-6 p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-0">
+        <!-- Campos del formulario -->
+        <form-text
+          [form]="form()"
+          fieldName="fieldName"
+          label="Label del Campo"
+          placeholder="Placeholder del campo"
+          inputType="text"
+          iconName="ICON_NAME"
+          [formUtils]="formUtils"
+          [isRequired]="true"
+        />
       </div>
-    </div>
+
+      <form-actions
+        [cancelRoute]="cancelRoute()"
+        [submitText]="submitButtonText()"
+        [isLoading]="isSubmitBlocked()"
+        (onSubmit)="onSubmit()"
+      />
+    </form>
   </div>
 </div>
 ```

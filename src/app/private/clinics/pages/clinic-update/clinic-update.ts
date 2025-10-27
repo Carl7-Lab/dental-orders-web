@@ -53,7 +53,8 @@ export class UpdateClinic {
 
   onConfirmUpdate() {
     this.showConfirmationModal.set(false);
-    const clinicData = this.form.value;
+    let clinicData = this.form.value;
+    clinicData = { ...clinicData, email: undefined, phone: undefined };
     const clinicId = parseInt(this.clinicId());
 
     this.clinicsService.updateClinic(clinicId, clinicData).subscribe({

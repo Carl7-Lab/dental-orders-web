@@ -38,7 +38,8 @@ export class CreateClinic {
 
   onConfirmCreate() {
     this.showConfirmationModal.set(false);
-    const clinicData = this.form.value;
+    let clinicData = this.form.value;
+    clinicData = { ...clinicData, email: undefined, phone: undefined };
 
     this.clinicsService.createClinic(clinicData).subscribe({
       next: (clinic) => {
