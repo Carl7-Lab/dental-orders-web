@@ -6,11 +6,11 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { FormHeaderComponent } from '../../../../shared/components/form/form-header/form-header.component';
 import { FormTextComponent } from '../../../../shared/components/form/form-text/form-text.component';
 import { FormActionsComponent } from '../../../../shared/components/form/form-actions/form-actions.component';
+import { Role } from '../../../../public/auth/services/auth.service';
 import {
   FormSelectComponent,
   SelectOption,
 } from '../../../../shared/components/form/form-select/form-select.component';
-import { Role } from '../../../../public/auth/services/auth.service';
 
 @Component({
   selector: 'form-user',

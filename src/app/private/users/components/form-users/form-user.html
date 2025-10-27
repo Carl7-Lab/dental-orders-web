@@ -70,6 +70,7 @@
           iconName="USER"
           [formUtils]="formUtils"
           [isRequired]="true"
+          popoverId="role-select-popover"
         />
       </div>
 
@@ -78,6 +79,7 @@
         [submitText]="submitButtonText()"
         [isLoading]="isSubmitBlocked()"
         (onSubmit)="onSubmit()"
+        [isSubmitDisabled]="form().invalid || isSubmitBlocked()"
       />
     </form>
   </div>

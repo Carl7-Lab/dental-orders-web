@@ -186,6 +186,23 @@ export const ICONS = {
       d: 'M19 9l-7 7-7-7',
     },
   },
+  CHEVRON_UP: {
+    div: {
+      class: '',
+    },
+    svg: {
+      class: 'w-4 h-4 text-base-content/50',
+      fill: 'none',
+      stroke: 'currentColor',
+      viewBox: '0 0 24 24',
+    },
+    path: {
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      strokeWidth: '2',
+      d: 'M5 15l7-7 7 7',
+    },
+  },
   ERROR: {
     div: {
       class: '',

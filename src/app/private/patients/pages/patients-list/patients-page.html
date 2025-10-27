@@ -4,10 +4,7 @@
 
   <!-- Nuevo Paciente -->
   <div class="flex justify-end mb-4">
-    <button
-      class="btn btn-primary btn-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
-      [routerLink]="[fullNavigationPaths.PATIENTS_CREATE]"
-    >
+    <button class="btn btn-primary btn-lg" [routerLink]="[fullNavigationPaths.PATIENTS_CREATE]">
       <app-icon name="PLUS" size="md"></app-icon>
       <span>Agregar Paciente</span>
     </button>
@@ -49,7 +46,7 @@
   <!-- Tabla de pacientes -->
   <div class="card bg-base-100 shadow-sm border border-base-300">
     <!-- Desktop Table -->
-    <div class="hidden lg:block overflow-x-auto">
+    <div class="hidden lg:block overflow-x-auto pb-[24px] px-[1px]">
       <table class="table table-zebra">
         <thead>
           <tr>

@@ -428,6 +428,7 @@ export class UpdateEntityName {
         [submitText]="submitButtonText()"
         [isLoading]="isSubmitBlocked()"
         (onSubmit)="onSubmit()"
+        [isSubmitDisabled]="isSubmitBlocked() || form().invalid"
       />
     </form>
   </div>
